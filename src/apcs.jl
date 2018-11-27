@@ -133,22 +133,23 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 function iauApcs(date1::Real, date2::Real, 
                pv::Array{<:Real, 2}, ebpv::Array{<:Real, 2}, 
                ehp::Array{<:Real, 1})
-   astrom  = Array{iauASTROM}(undef, 1)
+   # Allocate return value
+   ref_astrom = Ref{iauASTROM}(iauASTROM())
 
-   # Transpose input up front
+   # Transpose to map Julia (FORTRAN) -> C style memory allocation
    ebpv = Array{Float64, 2}(ebpv') 
    pv   = Array{Float64, 2}(pv')
 
    ccall((:iauApcs, libsofa_c), Cvoid, 
          (Cdouble, Cdouble, 
          Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, 
-         Ptr{Cvoid}), 
+         Ref{iauASTROM}), 
          convert(Float64, date1),
          convert(Float64, date2),
          pointer(pv),
          pointer(ebpv),
          pointer(ehp),
-         astrom)
+         ref_astrom)
 
-   return astrom[1]
+   return ref_astrom[]
 end

@@ -113,15 +113,13 @@ SOFA release 2018-01-30
 
 Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
-# void iauAper13(double ut11, double ut12, iauASTROM *astrom)
-
 function iauAper13(ut11::Real, ut12::Real, astrom::iauASTROM)
-   arr_astrom = [astrom]
+   ref_astrom = Ref{iauASTROM}(astrom)
    ccall((:iauAper13, libsofa_c), Cvoid, 
-            (Cdouble, Cdouble, Ptr{Cvoid}), 
+            (Cdouble, Cdouble, Ref{iauASTROM}), 
             convert(Float64, ut11),
             convert(Float64, ut12),
-            arr_astrom)
+            ref_astrom)
 
-   return arr_astrom[1]
+   return ref_astrom[]
 end

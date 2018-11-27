@@ -18,7 +18,7 @@ Star-independent astrometry parameters
 Note:
     - Vectors eb, eh, em and v are all with respect to BCRS axes.
 """
-struct iauASTROM
+mutable struct iauASTROM
     pmt::Float64                        # PM time interval (SSB, Julian years)
     eb::NTuple{3, Float64}            # SSB to observer (vector, au)
     eh::NTuple{3, Float64}            # Sun to observer (unit vector)
@@ -76,10 +76,16 @@ export iauLDBODY
 """
 Body parameters for light deflection
 """
-struct iauLDBODY
-    bm::Float64                         # mass of the body (solar masses)
-    dl::Float64                         # deflection limiter (radians^2/2)
-    bpn::NTuple{2, NTuple{3, Float64}}  # barycentric PV of the body (au, au/day)
+mutable struct iauLDBODY
+    bm::Float64            # mass of the body (solar masses)
+    dl::Float64            # deflection limiter (radians^2/2)
+    pv::NTuple{2, NTuple{3, Float64}}  # barycentric PV of the body (au, au/day)
+
+    function iauLDBODY(;bm::Real=0.0, dl::Real=0.0,
+        pv::Array{<:Real, 2}=[0.0 0.0 0.0; 0.0 0.0 0.0])
+
+        new(convert(Float64,bm), convert(Float64, dl), tuple(tuple(pv[1, :]...), tuple(pv[2, :]...)))
+    end
 end
 
 ####################
@@ -103,5 +109,10 @@ include("apcs.jl")
 include("apcs13.jl")
 include("aper.jl")
 include("aper13.jl")
+include("apio.jl")
+include("apio13.jl")
+include("atci13.jl")
+include("atciq.jl")
+include("atciqn.jl")
 
 end # module SOFA

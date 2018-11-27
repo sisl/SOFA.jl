@@ -180,21 +180,23 @@ function iauApco13(utc1::Real, utc2::Real, dut1::Real,
                   elong::Real, phi::Real, hm::Real,
                   xp::Real, yp::Real,
                   phpa::Real, tc::Real, rh::Real, wl::Real)
-   astrom  = Array{iauASTROM}(undef, 1)
-   eo      = zeros(Float64, 1)
+   # Allocate return value
+   ref_astrom = Ref{iauASTROM}(iauASTROM())
+   ref_eo     = Ref{Float64}(0.0)
+
 
    status = ccall((:iauApco13, libsofa_c), Cint, 
             (Cdouble, Cdouble, Cdouble, Cdouble,
             Cdouble, Cdouble, Cdouble, Cdouble,
             Cdouble, Cdouble, Cdouble, Cdouble,
-             Ptr{Cvoid}, Ptr{Cdouble}), 
+             Ref{iauASTROM}, Ref{Cdouble}), 
             convert(Float64, utc1), convert(Float64, utc2),
             convert(Float64, dut1), convert(Float64, elong),
             convert(Float64, phi), convert(Float64, hm),
             convert(Float64, xp), convert(Float64, yp),
             convert(Float64, phpa), convert(Float64, tc),
             convert(Float64, rh), convert(Float64, wl),
-            astrom, eo)
+            ref_astrom, ref_eo)
 
-   return status, astrom[1], eo[1]
+   return status, ref_astrom[], ref_eo[]
 end

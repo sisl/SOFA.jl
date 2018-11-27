@@ -105,17 +105,19 @@ SOFA release 2018-01-30
 Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 function iauApcg(date1::Real, date2::Real, ebpv::Array{<:Real, 2}, ehp::Array{<:Real, 1})
-    astrom  = Array{iauASTROM}(undef, 1)
+    # Allocate return value
+    ref_astrom = Ref{iauASTROM}(iauASTROM())
 
+    # Transpose to map Julia (FORTRAN) -> C style memory allocation
     ebpv = Array{Float64, 2}(ebpv') # Transpose input up front
 
     ccall((:iauApcg, libsofa_c), Cvoid, 
-            (Cdouble, Cdouble, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cvoid}), 
+            (Cdouble, Cdouble, Ptr{Cdouble}, Ptr{Cdouble}, Ref{iauASTROM}), 
             convert(Float64, date1),
             convert(Float64, date2),
             pointer(ebpv),
             pointer(ehp),
-            astrom)
+            ref_astrom)
 
-    return astrom[1]
+    return ref_astrom[]
 end

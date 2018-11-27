@@ -321,8 +321,8 @@ let
 end
 
 let
-    date1 = 2456384.5;
-    date2 = 0.970031644;
+    date1 = 2456384.5
+    date2 = 0.970031644
     pv = [
         -1836024.09 1056607.72 -5998795.26; 
         -77.0361767 -133.310856 0.0971855934;
@@ -396,8 +396,9 @@ let
 end
 
 let
-    astrom = iauASTROM(along=1.234)
-    theta  = 5.678
+    astrom       = iauASTROM()
+    astrom.along = 1.234
+    theta        = 5.678
 
     astrom = iauAper(theta, astrom)
 
@@ -405,7 +406,8 @@ let
 end
 
 let
-    astrom = iauASTROM(along = 1.234)
+    astrom       = iauASTROM()
+    astrom.along = 1.234
 
     ut11 = 2456165.5
     ut12 = 0.401182685
@@ -415,174 +417,137 @@ let
     @test isapprox(astrom.eral, 3.316236661789694933, atol=1e-12)
 end
 
+let
+   sp    = -3.01974337e-11
+   theta = 3.14540971
+   elong = -0.527800806
+   phi   = -1.2345856
+   hm    = 2738.0
+   xp    = 2.47230737e-7
+   yp    = 1.82640464e-6
+   refa  = 0.000201418779
+   refb  = -2.36140831e-7
+
+   astrom = iauApio(sp, theta, elong, phi, hm, xp, yp, refa, refb)
+
+   @test isapprox(astrom.along, -0.5278008060301974337, atol=1e-12)
+   @test isapprox(astrom.xpl, 0.1133427418174939329e-5, atol=1e-17)
+   @test isapprox(astrom.ypl, 0.1453347595745898629e-5, atol=1e-17)
+   @test isapprox(astrom.sphi, -0.9440115679003211329, atol=1e-12)
+   @test isapprox(astrom.cphi, 0.3299123514971474711, atol=1e-12)
+   @test isapprox(astrom.diurab, 0.5135843661699913529e-6, atol=1e-12)
+   @test isapprox(astrom.eral, 2.617608903969802566, atol=1e-12)
+   @test isapprox(astrom.refa, 0.2014187790000000000e-3, atol=1e-15)
+   @test isapprox(astrom.refb, -0.2361408310000000000e-6, atol=1e-18)
+end
+
+let
+   utc1  = 2456384.5
+   utc2  = 0.969254051
+   dut1  = 0.1550675
+   elong = -0.527800806
+   phi   = -1.2345856
+   hm    = 2738.0
+   xp    = 2.47230737e-7
+   yp    = 1.82640464e-6
+   phpa  = 731.0
+   tc    = 12.8
+   rh    = 0.59
+   wl    = 0.55
+
+   j, astrom = iauApio13(utc1, utc2, dut1, elong, phi, hm, xp, yp,
+                 phpa, tc, rh, wl)
+
+   @test isapprox(astrom.along, -0.5278008060301974337, atol=1e-12)
+   @test isapprox(astrom.xpl, 0.1133427418174939329e-5, atol=1e-17)
+   @test isapprox(astrom.ypl, 0.1453347595745898629e-5, atol=1e-17)
+   @test isapprox(astrom.sphi, -0.9440115679003211329, atol=1e-12)
+   @test isapprox(astrom.cphi, 0.3299123514971474711, atol=1e-12)
+   @test isapprox(astrom.diurab, 0.5135843661699913529e-6, atol=1e-12)
+   @test isapprox(astrom.eral, 2.617608909189066140, atol=1e-12)
+   @test isapprox(astrom.refa, 0.2014187785940396921e-3, atol=1e-15)
+   @test isapprox(astrom.refb, -0.2361408314943696227e-6, atol=1e-18)
+end
+
+let
+   rc    = 2.71
+   dc    = 0.174
+   pr    = 1e-5
+   pd    = 5e-6
+   px    = 0.1
+   rv    = 55.0
+   date1 = 2456165.5
+   date2 = 0.401182685
+
+   ri, di, eo = iauAtci13(rc, dc, pr, pd, px, rv, date1, date2)
+
+   @test isapprox(ri, 2.710121572968696744, atol=1e-12)
+   @test isapprox(di, 0.1729371367219539137, atol=1e-12)
+   @test isapprox(eo, -0.002900618712657375647, atol=1e-14)
+end
+
 # let
-#    double sp, theta, elong, phi, hm, xp, yp, refa, refb;
-#    iauASTROM astrom;
+#    date1 = 2456165.5
+#    date2 = 0.401182685
+#    astrom, eo = iauApci13(date1, date2)
 
+#    rc = 2.71
+#    dc = 0.174
+#    pr = 1e-5
+#    pd = 5e-6
+#    px = 0.1
+#    rv = 55.0
 
-#    sp = -3.01974337e-11;
-#    theta = 3.14540971;
-#    elong = -0.527800806;
-#    phi = -1.2345856;
-#    hm = 2738.0;
-#    xp = 2.47230737e-7;
-#    yp = 1.82640464e-6;
-#    refa = 0.000201418779;
-#    refb = -2.36140831e-7;
+#    ri, di = iauAtciq(rc, dc, pr, pd, px, rv, astrom)
 
-#    iauApio(sp, theta, elong, phi, hm, xp, yp, refa, refb, &astrom);
-
-#    @test isapprox(astrom.along, -0.5278008060301974337, 1e-12,
-#                      "iauApio", "along", status);
-#    @test isapprox(astrom.xpl, 0.1133427418174939329e-5, 1e-17,
-#                    "iauApio", "xpl", status);
-#    @test isapprox(astrom.ypl, 0.1453347595745898629e-5, 1e-17,
-#                    "iauApio", "ypl", status);
-#    @test isapprox(astrom.sphi, -0.9440115679003211329, 1e-12,
-#                     "iauApio", "sphi", status);
-#    @test isapprox(astrom.cphi, 0.3299123514971474711, 1e-12,
-#                     "iauApio", "cphi", status);
-#    @test isapprox(astrom.diurab, 0.5135843661699913529e-6, 1e-12,
-#                       "iauApio", "diurab", status);
-#    @test isapprox(astrom.eral, 2.617608903969802566, 1e-12,
-#                     "iauApio", "eral", status);
-#    @test isapprox(astrom.refa, 0.2014187790000000000e-3, 1e-15,
-#                     "iauApio", "refa", status);
-#    @test isapprox(astrom.refb, -0.2361408310000000000e-6, 1e-18,
-#                     "iauApio", "refb", status);
+#    @test isapprox(ri, 2.710121572968696744, atol=1e-12)
+#    @test isapprox(di, 0.1729371367219539137, atol=1e-12)
 # end
 
 # let
-#    double utc1, utc2, dut1, elong, phi, hm, xp, yp, phpa, tc, rh, wl;
-#    int j;
-#    iauASTROM astrom;
+#     b = [iauLDBODY(), iauLDBODY(), iauLDBODY()]
+    
+#     date1 = 2456165.5;
+#     date2 = 0.401182685;
+#     astrom, eo = iauApci13(date1, date2)
 
+#     rc = 2.71
+#     dc = 0.174
+#     pr = 1e-5
+#     pd = 5e-6
+#     px = 0.1
+#     rv = 55.0
+#     b[1].bm = 0.00028574
+#     b[1].dl = 3e-10
+#     b[1].pv[1, 1] = -7.81014427
+#     b[1].pv[1, 2] = -5.60956681
+#     b[1].pv[1, 3] = -1.98079819
+#     b[1].pv[2, 1] =  0.0030723249
+#     b[1].pv[2, 2] = -0.00406995477
+#     b[1].pv[2, 3] = -0.00181335842
+#     b[2].bm = 0.00095435
+#     b[2].dl = 3e-9
+#     b[2].pv[1, 1] =  0.738098796
+#     b[2].pv[1, 2] =  4.63658692
+#     b[2].pv[1, 3] =  1.9693136
+#     b[2].pv[2, 1] = -0.00755816922
+#     b[2].pv[2, 2] =  0.00126913722
+#     b[2].pv[2, 3] =  0.000727999001
+#     b[3].bm = 1.0
+#     b[3].dl = 6e-6
+#     b[3].pv[1, 1] = -0.000712174377
+#     b[3].pv[1, 2] = -0.00230478303
+#     b[3].pv[1, 3] = -0.00105865966
+#     b[3].pv[2, 1] =  6.29235213e-6
+#     b[3].pv[2, 2] = -3.30888387e-7
+#     b[3].pv[2, 3] = -2.96486623e-7
 
-#    utc1 = 2456384.5;
-#    utc2 = 0.969254051;
-#    dut1 = 0.1550675;
-#    elong = -0.527800806;
-#    phi = -1.2345856;
-#    hm = 2738.0;
-#    xp = 2.47230737e-7;
-#    yp = 1.82640464e-6;
-#    phpa = 731.0;
-#    tc = 12.8;
-#    rh = 0.59;
-#    wl = 0.55;
+#     ri, di = iauAtciqn(rc, dc, pr, pd, px, rv, astrom, 3, b)
 
-#    j = iauApio13(utc1, utc2, dut1, elong, phi, hm, xp, yp,
-#                  phpa, tc, rh, wl, &astrom);
-
-#    @test isapprox(astrom.along, -0.5278008060301974337, 1e-12,
-#                      "iauApio13", "along", status);
-#    @test isapprox(astrom.xpl, 0.1133427418174939329e-5, 1e-17,
-#                    "iauApio13", "xpl", status);
-#    @test isapprox(astrom.ypl, 0.1453347595745898629e-5, 1e-17,
-#                    "iauApio13", "ypl", status);
-#    @test isapprox(astrom.sphi, -0.9440115679003211329, 1e-12,
-#                     "iauApio13", "sphi", status);
-#    @test isapprox(astrom.cphi, 0.3299123514971474711, 1e-12,
-#                     "iauApio13", "cphi", status);
-#    @test isapprox(astrom.diurab, 0.5135843661699913529e-6, 1e-12,
-#                       "iauApio13", "diurab", status);
-#    @test isapprox(astrom.eral, 2.617608909189066140, 1e-12,
-#                     "iauApio13", "eral", status);
-#    @test isapprox(astrom.refa, 0.2014187785940396921e-3, 1e-15,
-#                     "iauApio13", "refa", status);
-#    @test isapprox(astrom.refb, -0.2361408314943696227e-6, 1e-18,
-#                     "iauApio13", "refb", status);
-#    viv(j, 0, "iauApio13", "j", status);
+#     @test isapprox(ri, 2.710122008104983335, atol=1e-12)
+#     @test isapprox(di, 0.1729371916492767821, atol=1e-12)
 # end
-
-# let
-#    double rc, dc, pr, pd, px, rv, date1, date2, ri, di, eo;
-
-
-#    rc = 2.71;
-#    dc = 0.174;
-#    pr = 1e-5;
-#    pd = 5e-6;
-#    px = 0.1;
-#    rv = 55.0;
-#    date1 = 2456165.5;
-#    date2 = 0.401182685;
-
-#    iauAtci13(rc, dc, pr, pd, px, rv, date1, date2, &ri, &di, &eo);
-
-#    @test isapprox(ri, 2.710121572968696744, 1e-12,
-#            "iauAtci13", "ri", status);
-#    @test isapprox(di, 0.1729371367219539137, 1e-12,
-#            "iauAtci13", "di", status);
-#    @test isapprox(eo, -0.002900618712657375647, 1e-14,
-#            "iauAtci13", "eo", status);
-# end
-
-# let
-#    double date1, date2, eo, rc, dc, pr, pd, px, rv, ri, di;
-#    iauASTROM astrom;
-
-#    date1 = 2456165.5;
-#    date2 = 0.401182685;
-#    iauApci13(date1, date2, &astrom, &eo);
-#    rc = 2.71;
-#    dc = 0.174;
-#    pr = 1e-5;
-#    pd = 5e-6;
-#    px = 0.1;
-#    rv = 55.0;
-
-#    iauAtciq(rc, dc, pr, pd, px, rv, &astrom, &ri, &di);
-
-#    @test isapprox(ri, 2.710121572968696744, 1e-12, "iauAtciq", "ri", status);
-#    @test isapprox(di, 0.1729371367219539137, 1e-12, "iauAtciq", "di", status);
-# end
-
-# let
-#    iauLDBODY b[3];
-#    double date1, date2, eo, rc, dc, pr, pd, px, rv, ri, di;
-#    iauASTROM astrom;
-
-#    date1 = 2456165.5;
-#    date2 = 0.401182685;
-#    iauApci13(date1, date2, &astrom, &eo);
-#    rc = 2.71;
-#    dc = 0.174;
-#    pr = 1e-5;
-#    pd = 5e-6;
-#    px = 0.1;
-#    rv = 55.0;
-#    b[0].bm = 0.00028574;
-#    b[0].dl = 3e-10;
-#    b[0].pv[0][0] = -7.81014427;
-#    b[0].pv[0][1] = -5.60956681;
-#    b[0].pv[0][2] = -1.98079819;
-#    b[0].pv[1][0] =  0.0030723249;
-#    b[0].pv[1][1] = -0.00406995477;
-#    b[0].pv[1][2] = -0.00181335842;
-#    b[1].bm = 0.00095435;
-#    b[1].dl = 3e-9;
-#    b[1].pv[0][0] =  0.738098796;
-#    b[1].pv[0][1] =  4.63658692;
-#    b[1].pv[0][2] =  1.9693136;
-#    b[1].pv[1][0] = -0.00755816922;
-#    b[1].pv[1][1] =  0.00126913722;
-#    b[1].pv[1][2] =  0.000727999001;
-#    b[2].bm = 1.0;
-#    b[2].dl = 6e-6;
-#    b[2].pv[0][0] = -0.000712174377;
-#    b[2].pv[0][1] = -0.00230478303;
-#    b[2].pv[0][2] = -0.00105865966;
-#    b[2].pv[1][0] =  6.29235213e-6;
-#    b[2].pv[1][1] = -3.30888387e-7;
-#    b[2].pv[1][2] = -2.96486623e-7;
-
-#    iauAtciqn ( rc, dc, pr, pd, px, rv, &astrom, 3, b, &ri, &di);
-
-#    @test isapprox(ri, 2.710122008104983335, 1e-12, "iauAtciqn", "ri", status);
-#    @test isapprox(di, 0.1729371916492767821, 1e-12, "iauAtciqn", "di", status);
-# end
-
+####
 # let
 #    double date1, date2, eo, rc, dc, ri, di;
 #    iauASTROM astrom;

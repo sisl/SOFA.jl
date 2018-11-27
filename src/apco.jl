@@ -158,17 +158,20 @@ function iauApco(date1::Real, date2::Real,
                  elong::Real, phi::Real, hm::Real,
                  xp::Real, yp::Real, sp::Real,
                  refa::Real, refb::Real)
-    astrom  = Array{iauASTROM}(undef, 1)
 
-    ebpv = Array{Float64, 2}(ebpv') # Transpose input up front
+   # Allocate return value
+   ref_astrom = Ref{iauASTROM}(iauASTROM())
 
-    ccall((:iauApco, libsofa_c), Cvoid, 
+   # Transpose to map Julia (FORTRAN) -> C style memory allocation
+   ebpv = Array{Float64, 2}(ebpv') # Transpose input up front
+
+   ccall((:iauApco, libsofa_c), Cvoid, 
             (Cdouble, Cdouble, Ptr{Cdouble}, Ptr{Cdouble}, 
             Cdouble, Cdouble, Cdouble,
             Cdouble, Cdouble, Cdouble,
             Cdouble, Cdouble, Cdouble,
             Cdouble, Cdouble, Cdouble,
-            Ptr{Cvoid}), 
+            Ref{iauASTROM}), 
             convert(Float64, date1),
             convert(Float64, date2),
             pointer(ebpv),
@@ -185,7 +188,7 @@ function iauApco(date1::Real, date2::Real,
             convert(Float64, sp),
             convert(Float64, refa),
             convert(Float64, refb),
-            astrom)
+            ref_astrom)
 
-    return astrom[1]
+   return ref_astrom[]
 end

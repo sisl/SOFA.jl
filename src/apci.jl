@@ -117,14 +117,16 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 function iauApci(date1::Real, date2::Real, 
                  ebpv::Array{<:Real, 2}, ehp::Array{<:Real, 1},
                  x::Real, y::Real, s::Real)
-    astrom  = Array{iauASTROM}(undef, 1)
+    # Allocate return value
+    ref_astrom = Ref{iauASTROM}(iauASTROM())
 
+    # Transpose to map Julia (FORTRAN) -> C style memory allocation
     ebpv = Array{Float64, 2}(ebpv') # Transpose input up front
 
     ccall((:iauApci, libsofa_c), Cvoid, 
             (Cdouble, Cdouble, Ptr{Cdouble}, Ptr{Cdouble}, 
             Cdouble, Cdouble, Cdouble,
-            Ptr{Cvoid}), 
+            Ref{iauASTROM}), 
             convert(Float64, date1),
             convert(Float64, date2),
             pointer(ebpv),
@@ -132,7 +134,7 @@ function iauApci(date1::Real, date2::Real,
             convert(Float64, x),
             convert(Float64, y),
             convert(Float64, s),
-            astrom)
+            ref_astrom)
 
-    return astrom[1]
+    return ref_astrom[]
 end

@@ -120,19 +120,19 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 
 function iauApcs13(date1::Real, date2::Real,
                   pv::Array{<:Real, 2})
-   # Initialize Return data structures
-   astrom  = Array{iauASTROM}(undef, 1)
+   # Allocate return value
+   ref_astrom = Ref{iauASTROM}(iauASTROM())
 
-   # Transpose
+   # Transpose to map Julia (FORTRAN) -> C style memory allocation
    pv   = Array{Float64, 2}(pv')
 
    status = ccall((:iauApcs13, libsofa_c), Cvoid, 
             (Cdouble, Cdouble, Ptr{Cdouble},
-            Ptr{Cvoid}), 
+            Ref{iauASTROM}), 
             convert(Float64, date1),
             convert(Float64, date2),
             pointer(pv),
-            astrom)
+            ref_astrom)
 
-   return astrom[1]
+   return ref_astrom[]
 end
