@@ -9976,7 +9976,7 @@ int main(int argc, char *argv[])
    t_tttdb(&status);
    t_ttut1(&status);
    t_ut1tai(&status);
-   t_ut1tt(&status) ;
+   t_ut1tt(&status);
    t_ut1utc(&status);
    t_utctai(&status);
    t_utcut1(&status);
