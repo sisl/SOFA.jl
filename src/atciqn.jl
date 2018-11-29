@@ -116,18 +116,27 @@ function iauAtciqn(rc::Real, dc::Real, pr::Real, pd::Real,
    ref_astrom = Ref{iauASTROM}(astrom)
    ref_ri     = Ref{Float64}(0.0)
    ref_di     = Ref{Float64}(0.0)
-   ref_b      = Ref{Array{iauLDBODY, 1}}(b)
+   ref_b      = Ref{iauLDBODY}(b[1])
 
+   # for ld in b
+   #    # ld.pv = ld.pv'
+   #    ld.pv = ((ld.pv[1]))
+   # end
+   
    ccall((:iauAtciqn, libsofa_c), Cvoid, 
             (Cdouble, Cdouble,
             Cdouble, Cdouble,
             Cdouble, Cdouble,
-            Ref{iauASTROM}, Cint, Ref{Array{iauLDBODY, 1}},  
+            Ref{iauASTROM}, Cint, Ref{iauLDBODY},  
             Ref{Cdouble}, Ref{Cdouble}), 
             convert(Float64, rc), convert(Float64, dc),
             convert(Float64, pr), convert(Float64, pd),
             convert(Float64, px), convert(Float64, rv),
             ref_astrom, convert(Int32, n), ref_b, ref_ri, ref_di)
+   
+   # for ld in b
+   #    ld.pv = ld.pv'
+   # end
 
    return ref_ri[], ref_di[]
 end
