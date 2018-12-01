@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/sisl/SOFA.jl.svg?branch=master)](https://travis-ci.org/sisl/SOFA.jl) [![Coverage Status](https://coveralls.io/repos/github/sisl/SOFA.jl/badge.svg?branch=master)](https://coveralls.io/github/sisl/SOFA.jl?branch=master)
+
 # SOFA.jl
 Unofficial wrapper of the IAU SOFA C libraries for fundamental astronomy. 
 
