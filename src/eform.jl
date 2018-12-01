@@ -73,9 +73,9 @@ function iauEform(n::Int)
                convert(Int32, n),
                ref_a, ref_f)
 
-   if status != 0
-      @warn "iauEform return non-zero exit status: $status"
-   end
+   # if status != 0
+   #    @warn "iauEform return non-zero exit status: $status"
+   # end
 
    return status, ref_a[], ref_f[]
 end

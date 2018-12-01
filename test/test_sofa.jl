@@ -1532,235 +1532,188 @@ let
     @test isapprox(iauFave03(0.80), 3.424900460533758000, atol=1e-12)
 end
 
-# let
-#    double r5, d5, dr5, dd5, px5, rv5, rh, dh, drh, ddh, pxh, rvh;
+let
+    r5  =  1.76779433
+    d5  = -0.2917517103
+    dr5 = -1.91851572e-7
+    dd5 = -5.8468475e-6
+    px5 =  0.379210
+    rv5 = -7.6
 
+    rh, dh, drh, ddh, pxh, rvh = iauFk52h(r5, d5, dr5, dd5, px5, rv5)
 
-#    r5  =  1.76779433;
-#    d5  = -0.2917517103;
-#    dr5 = -1.91851572e-7;
-#    dd5 = -5.8468475e-6;
-#    px5 =  0.379210;
-#    rv5 = -7.6;
+    @test isapprox(rh, 1.767794226299947632, atol=1e-14)
+    @test isapprox(dh,  -0.2917516070530391757, atol=1e-14)
+    @test isapprox(drh, -0.19618741256057224e-6,atol=1e-19)
+    @test isapprox(ddh, -0.58459905176693911e-5, atol=1e-19)
+    @test isapprox(pxh,  0.37921, atol=1e-14)
+    @test isapprox(rvh, -7.6000000940000254, atol=1e-11)
+end
 
-#    iauFk52h(r5, d5, dr5, dd5, px5, rv5,
-#             &rh, &dh, &drh, &ddh, &pxh, &rvh);
+let
+    r5h, s5h = iauFk5hip()
 
-#    @test isapprox(rh, 1.767794226299947632, 1e-14,
-#        "iauFk52h", "ra", status);
-#    @test isapprox(dh,  -0.2917516070530391757, 1e-14,
-#        "iauFk52h", "dec", status);
-#    @test isapprox(drh, -0.19618741256057224e-6,1e-19,
-#        "iauFk52h", "dr5", status);
-#    @test isapprox(ddh, -0.58459905176693911e-5, 1e-19,
-#        "iauFk52h", "dd5", status);
-#    @test isapprox(pxh,  0.37921, 1e-14,
-#        "iauFk52h", "px", status);
-#    @test isapprox(rvh, -7.6000000940000254, 1e-11,
-#        "iauFk52h", "rv", status);
-# end
+   @test isapprox(r5h[1, 1], 0.9999999999999928638, atol=1e-14)
+   @test isapprox(r5h[1, 2], 0.1110223351022919694e-6, atol=1e-17)
+   @test isapprox(r5h[1, 3], 0.4411803962536558154e-7, atol=1e-17)
+   @test isapprox(r5h[2, 1], -0.1110223308458746430e-6, atol=1e-17)
+   @test isapprox(r5h[2, 2], 0.9999999999999891830, atol=1e-14)
+   @test isapprox(r5h[2, 3], -0.9647792498984142358e-7, atol=1e-17)
+   @test isapprox(r5h[3, 1], -0.4411805033656962252e-7, atol=1e-17)
+   @test isapprox(r5h[3, 2], 0.9647792009175314354e-7, atol=1e-17)
+   @test isapprox(r5h[3, 3], 0.9999999999999943728, atol=1e-14)
+   @test isapprox(s5h[1], -0.1454441043328607981e-8, atol=1e-17)
+   @test isapprox(s5h[2], 0.2908882086657215962e-8, atol=1e-17)
+   @test isapprox(s5h[3], 0.3393695767766751955e-8, atol=1e-17)
+end
 
-# let
-#    double r5h[3][3], s5h[3];
+let
+    r5 =  1.76779433;
+    d5 = -0.2917517103;
 
+    rh, dh = iauFk5hz(r5, d5, 2400000.5, 54479.0)
 
-#    iauFk5hip(r5h, s5h);
+    @test isapprox(rh,  1.767794191464423978, atol=1e-12)
+    @test isapprox(dh, -0.2917516001679884419, atol=1e-12)
+end
 
-#    @test isapprox(r5h[0][0], 0.9999999999999928638, 1e-14,
-#        "iauFk5hip", "11", status);
-#    @test isapprox(r5h[0][1], 0.1110223351022919694e-6, 1e-17,
-#        "iauFk5hip", "12", status);
-#    @test isapprox(r5h[0][2], 0.4411803962536558154e-7, 1e-17,
-#        "iauFk5hip", "13", status);
-#    @test isapprox(r5h[1][0], -0.1110223308458746430e-6, 1e-17,
-#        "iauFk5hip", "21", status);
-#    @test isapprox(r5h[1][1], 0.9999999999999891830, 1e-14,
-#        "iauFk5hip", "22", status);
-#    @test isapprox(r5h[1][2], -0.9647792498984142358e-7, 1e-17,
-#        "iauFk5hip", "23", status);
-#    @test isapprox(r5h[2][0], -0.4411805033656962252e-7, 1e-17,
-#        "iauFk5hip", "31", status);
-#    @test isapprox(r5h[2][1], 0.9647792009175314354e-7, 1e-17,
-#        "iauFk5hip", "32", status);
-#    @test isapprox(r5h[2][2], 0.9999999999999943728, 1e-14,
-#        "iauFk5hip", "33", status);
-#    @test isapprox(s5h[0], -0.1454441043328607981e-8, 1e-17,
-#        "iauFk5hip", "s1", status);
-#    @test isapprox(s5h[1], 0.2908882086657215962e-8, 1e-17,
-#        "iauFk5hip", "s2", status);
-#    @test isapprox(s5h[2], 0.3393695767766751955e-8, 1e-17,
-#        "iauFk5hip", "s3", status);
-# end
+let
+    gamb = -0.2243387670997992368e-5
+    phib =  0.4091014602391312982
+    psi  = -0.9501954178013015092e-3
+    eps  =  0.4091014316587367472
 
-# let
-#    double r5, d5, rh, dh;
+    r = iauFw2m(gamb, phib, psi, eps)
 
+    @test isapprox(r[1, 1], 0.9999995505176007047, atol=1e-12)
+    @test isapprox(r[1, 2], 0.8695404617348192957e-3, atol=1e-12)
+    @test isapprox(r[1, 3], 0.3779735201865582571e-3, atol=1e-12)
 
-#    r5 =  1.76779433;
-#    d5 = -0.2917517103;
+    @test isapprox(r[2, 1], -0.8695404723772016038e-3, atol=1e-12)
+    @test isapprox(r[2, 2], 0.9999996219496027161, atol=1e-12)
+    @test isapprox(r[2, 3], -0.1361752496887100026e-6, atol=1e-12)
 
-#    iauFk5hz(r5, d5, 2400000.5, 54479.0, &rh, &dh);
+    @test isapprox(r[3, 1], -0.3779734957034082790e-3, atol=1e-12)
+    @test isapprox(r[3, 2], -0.1924880848087615651e-6, atol=1e-12)
+    @test isapprox(r[3, 3], 0.9999999285679971958, atol=1e-12)
+end
 
-#    @test isapprox(rh,  1.767794191464423978, 1e-12, "iauFk5hz", "ra", status);
-#    @test isapprox(dh, -0.2917516001679884419, 1e-12, "iauFk5hz", "dec", status);
-# end
+let
+    gamb = -0.2243387670997992368e-5
+    phib =  0.4091014602391312982
+    psi  = -0.9501954178013015092e-3
+    eps  =  0.4091014316587367472
 
-# let
-#    double gamb, phib, psi, eps, r[3][3];
+    x, y = iauFw2xy(gamb, phib, psi, eps)
 
+    @test isapprox(x, -0.3779734957034082790e-3, atol=1e-14)
+    @test isapprox(y, -0.1924880848087615651e-6, atol=1e-14)
+end
 
-#    gamb = -0.2243387670997992368e-5;
-#    phib =  0.4091014602391312982;
-#    psi  = -0.9501954178013015092e-3;
-#    eps  =  0.4091014316587367472;
+let
+    dl =  5.5850536063818546461558105
+    db = -0.7853981633974483096156608
+    dr, dd = iauG2icrs(dl, db)
 
-#    iauFw2m(gamb, phib, psi, eps, r);
+    @test isapprox(dr,  5.9338074302227188048671, atol=1e-14)
+    @test isapprox(dd, -1.1784870613579944551541, atol=1e-14)
+end
 
-#    @test isapprox(r[0][0], 0.9999995505176007047, 1e-12,
-#        "iauFw2m", "11", status);
-#    @test isapprox(r[0][1], 0.8695404617348192957e-3, 1e-12,
-#        "iauFw2m", "12", status);
-#    @test isapprox(r[0][2], 0.3779735201865582571e-3, 1e-12,
-#        "iauFw2m", "13", status);
+let
+   xyz = [2e6, 3e6, 5.244e6]
 
-#    @test isapprox(r[1][0], -0.8695404723772016038e-3, 1e-12,
-#        "iauFw2m", "21", status);
-#    @test isapprox(r[1][1], 0.9999996219496027161, 1e-12,
-#        "iauFw2m", "22", status);
-#    @test isapprox(r[1][2], -0.1361752496887100026e-6, 1e-12,
-#        "iauFw2m", "23", status);
+   j, e, p, h = iauGc2gd(0, xyz)
 
-#    @test isapprox(r[2][0], -0.3779734957034082790e-3, 1e-12,
-#        "iauFw2m", "31", status);
-#    @test isapprox(r[2][1], -0.1924880848087615651e-6, 1e-12,
-#        "iauFw2m", "32", status);
-#    @test isapprox(r[2][2], 0.9999999285679971958, 1e-12,
-#        "iauFw2m", "33", status);
-# end
+   @test j == -1
 
-# let
-#    double gamb, phib, psi, eps, x, y;
+   j, e, p, h = iauGc2gd(SOFA.WGS84, xyz)
 
+   @test j == 0
+   @test isapprox(e, 0.9827937232473290680, atol=1e-14)
+   @test isapprox(p, 0.97160184819075459, atol=1e-14)
+   @test isapprox(h, 331.4172461426059892, atol=1e-8)
 
-#    gamb = -0.2243387670997992368e-5;
-#    phib =  0.4091014602391312982;
-#    psi  = -0.9501954178013015092e-3;
-#    eps  =  0.4091014316587367472;
+   j, e, p, h = iauGc2gd(SOFA.GRS80, xyz)
 
-#    iauFw2xy(gamb, phib, psi, eps, &x, &y);
+   @test j == 0
+   @test isapprox(e, 0.9827937232473290680, atol=1e-14)
+   @test isapprox(p, 0.97160184820607853, atol=1e-14)
+   @test isapprox(h, 331.41731754844348, atol=1e-8)
 
-#    @test isapprox(x, -0.3779734957034082790e-3, 1e-14, "iauFw2xy", "x", status);
-#    @test isapprox(y, -0.1924880848087615651e-6, 1e-14, "iauFw2xy", "y", status);
-# end
+   j, e, p, h = iauGc2gd(SOFA.WGS72, xyz)
 
-# let
-#    double dl, db, dr, dd;
+   @test j == 0
+   @test isapprox(e, 0.9827937232473290680, atol=1e-14)
+   @test isapprox(p, 0.9716018181101511937, atol=1e-14)
+   @test isapprox(h, 333.2770726130318123, atol=1e-8)
 
+   j, e, p, h = iauGc2gd(4, xyz)
 
-#    dl =  5.5850536063818546461558105;
-#    db = -0.7853981633974483096156608;
-#    iauG2icrs (dl, db, &dr, &dd);
-#    @test isapprox(dr,  5.9338074302227188048671, 1e-14, "iauG2icrs", "R", status);
-#    @test isapprox(dd, -1.1784870613579944551541, 1e-14, "iauG2icrs", "D", status);
-# end
+   @test j == -1
+end
 
-# let
-#    int j;
-#    double xyz[] = {2e6, 3e6, 5.244eend;
-#    double e, p, h;
+let
+   a = 6378136.0
+   f = 0.0033528
+   xyz = [2e6, 3e6, 5.244e6]
 
-#    j = iauGc2gd(0, xyz, &e, &p, &h);
+   j, e, p, h = iauGc2gde(a, f, xyz)
 
-#    @test j == -1
+   @test j == 0
+   @test isapprox(e, 0.9827937232473290680, atol=1e-14)
+   @test isapprox(p, 0.9716018377570411532, atol=1e-14)
+   @test isapprox(h, 332.36862495764397, atol=1e-8)
+end
 
-#    j = iauGc2gd(WGS84, xyz, &e, &p, &h);
+let
+    e = 3.1
+    p = -0.5
+    h = 2500.0
+    
+    j, xyz = iauGd2gc(0, e, p, h)
 
-#    @test j == 0
-#    @test isapprox(e, 0.9827937232473290680, 1e-14, "iauGc2gd", "e1", status);
-#    @test isapprox(p, 0.97160184819075459, 1e-14, "iauGc2gd", "p1", status);
-#    @test isapprox(h, 331.4172461426059892, 1e-8, "iauGc2gd", "h1", status);
+    @test j == -1
 
-#    j = iauGc2gd(GRS80, xyz, &e, &p, &h);
+    j, xyz = iauGd2gc(SOFA.WGS84, e, p, h)
 
-#    @test j == 0
-#    @test isapprox(e, 0.9827937232473290680, 1e-14, "iauGc2gd", "e2", status);
-#    @test isapprox(p, 0.97160184820607853, 1e-14, "iauGc2gd", "p2", status);
-#    @test isapprox(h, 331.41731754844348, 1e-8, "iauGc2gd", "h2", status);
+    @test j == 0
+    @test isapprox(xyz[1], -5599000.5577049947, atol=1e-7)
+    @test isapprox(xyz[2], 233011.67223479203, atol=1e-7)
+    @test isapprox(xyz[3], -3040909.4706983363, atol=1e-7)
 
-#    j = iauGc2gd(WGS72, xyz, &e, &p, &h);
+    j, xyz = iauGd2gc(SOFA.GRS80, e, p, h)
 
-#    @test j == 0
-#    @test isapprox(e, 0.9827937232473290680, 1e-14, "iauGc2gd", "e3", status);
-#    @test isapprox(p, 0.9716018181101511937, 1e-14, "iauGc2gd", "p3", status);
-#    @test isapprox(h, 333.2770726130318123, 1e-8, "iauGc2gd", "h3", status);
+    @test j == 0
+    @test isapprox(xyz[1], -5599000.5577260984, atol=1e-7)
+    @test isapprox(xyz[2], 233011.6722356702949, atol=1e-7)
+    @test isapprox(xyz[3], -3040909.4706095476, atol=1e-7)
 
-#    j = iauGc2gd(4, xyz, &e, &p, &h);
+    j, xyz = iauGd2gc(SOFA.WGS72, e, p, h)
 
-#    @test j == -1
-#end
+    @test j == 0
+    @test isapprox(xyz[1], -5598998.7626301490, atol=1e-7)
+    @test isapprox(xyz[2], 233011.5975297822211, atol=1e-7)
+    @test isapprox(xyz[3], -3040908.6861467111, atol=1e-7)
 
-# let
-#    int j;
-#    double a = 6378136.0, f = 0.0033528;
-#    double xyz[] = {2e6, 3e6, 5.244eend;
-#    double e, p, h;
+    j, xyz = iauGd2gc(4, e, p, h)
 
-#    j = iauGc2gde(a, f, xyz, &e, &p, &h);
+    @test j == -1
+end
 
-#    @test j == 0
-#    @test isapprox(e, 0.9827937232473290680, 1e-14, "iauGc2gde", "e", status);
-#    @test isapprox(p, 0.9716018377570411532, 1e-14, "iauGc2gde", "p", status);
-#    @test isapprox(h, 332.36862495764397, 1e-8, "iauGc2gde", "h", status);
-#end
+let
+    a = 6378136.0
+    f = 0.0033528
+    e = 3.1
+    p = -0.5
+    h = 2500.0
 
-# let
-#    int j;
-#    double e = 3.1, p = -0.5, h = 2500.0;
-#    double xyz[3];
+    j, xyz = iauGd2gce(a, f, e, p, h)
 
-#    j = iauGd2gc(0, e, p, h, xyz);
-
-#    @test j == -1
-
-#    j = iauGd2gc(WGS84, e, p, h, xyz);
-
-#    @test j == 0
-#    @test isapprox(xyz[0], -5599000.5577049947, 1e-7, "iauGd2gc", "1/1", status);
-#    @test isapprox(xyz[1], 233011.67223479203, 1e-7, "iauGd2gc", "2/1", status);
-#    @test isapprox(xyz[2], -3040909.4706983363, 1e-7, "iauGd2gc", "3/1", status);
-
-#    j = iauGd2gc(GRS80, e, p, h, xyz);
-
-#    @test j == 0
-#    @test isapprox(xyz[0], -5599000.5577260984, 1e-7, "iauGd2gc", "1/2", status);
-#    @test isapprox(xyz[1], 233011.6722356702949, 1e-7, "iauGd2gc", "2/2", status);
-#    @test isapprox(xyz[2], -3040909.4706095476, 1e-7, "iauGd2gc", "3/2", status);
-
-#    j = iauGd2gc(WGS72, e, p, h, xyz);
-
-#    @test j == 0
-#    @test isapprox(xyz[0], -5598998.7626301490, 1e-7, "iauGd2gc", "1/3", status);
-#    @test isapprox(xyz[1], 233011.5975297822211, 1e-7, "iauGd2gc", "2/3", status);
-#    @test isapprox(xyz[2], -3040908.6861467111, 1e-7, "iauGd2gc", "3/3", status);
-
-#    j = iauGd2gc(4, e, p, h, xyz);
-
-#    @test j == -1
-#end
-
-# let
-#    int j;
-#    double a = 6378136.0, f = 0.0033528;
-#    double e = 3.1, p = -0.5, h = 2500.0;
-#    double xyz[3];
-
-#    j = iauGd2gce(a, f, e, p, h, xyz);
-
-#    @test j == 0
-#    @test isapprox(xyz[0], -5598999.6665116328, 1e-7, "iauGd2gce", "1", status);
-#    @test isapprox(xyz[1], 233011.6351463057189, 1e-7, "iauGd2gce", "2", status);
-#    @test isapprox(xyz[2], -3040909.0517314132, 1e-7, "iauGd2gce", "3", status);
-#end
+    @test j == 0
+    @test isapprox(xyz[1], -5598999.6665116328, atol=1e-7)
+    @test isapprox(xyz[2], 233011.6351463057189, atol=1e-7)
+    @test isapprox(xyz[3], -3040909.0517314132, atol=1e-7)
+end
 
 let
     theta = iauGmst00(2400000.5, 53736.0, 2400000.5, 53736.0)
@@ -1814,90 +1767,64 @@ let
     @test isapprox(theta, 1.754166136020645203, atol=1e-12)
 end
 
-# let
-#    double dr, dd, dl, db;
+let
+    dr =  5.9338074302227188048671087
+    dd = -1.1784870613579944551540570
+    dl, db = iauIcrs2g(dr, dd)
+    @test isapprox(dl,  5.5850536063818546461558, atol=1e-14)
+    @test isapprox(db, -0.7853981633974483096157, atol=1e-14)
+end
 
-#    dr =  5.9338074302227188048671087;
-#    dd = -1.1784870613579944551540570;
-#    iauIcrs2g (dr, dd, &dl, &db);
-#    @test isapprox(dl,  5.5850536063818546461558, 1e-14, "iauIcrs2g", "L", status);
-#    @test isapprox(db, -0.7853981633974483096157, 1e-14, "iauIcrs2g", "B", status);
-# end
+let
+   rh  =  1.767794352
+   dh  = -0.2917512594
+   drh = -2.76413026e-6
+   ddh = -5.92994449e-6
+   pxh =  0.379210
+   rvh = -7.6
 
-# let
-#    double rh, dh, drh, ddh, pxh, rvh, r5, d5, dr5, dd5, px5, rv5;
+   r5, d5, dr5, dd5, px5, rv5 = iauH2fk5(rh, dh, drh, ddh, pxh, rvh)
 
+   @test isapprox(r5, 1.767794455700065506, atol=1e-13)
+   @test isapprox(d5, -0.2917513626469638890, atol=1e-13)
+   @test isapprox(dr5, -0.27597945024511204e-5, atol=1e-18)
+   @test isapprox(dd5, -0.59308014093262838e-5, atol=1e-18)
+   @test isapprox(px5, 0.37921, atol=1e-13)
+   @test isapprox(rv5, -7.6000001309071126, atol=1e-11)
+end
 
-#    rh  =  1.767794352;
-#    dh  = -0.2917512594;
-#    drh = -2.76413026e-6;
-#    ddh = -5.92994449e-6;
-#    pxh =  0.379210;
-#    rvh = -7.6;
+let
+    h = 1.1
+    d = 1.2
+    p = 0.3
 
-#    iauH2fk5(rh, dh, drh, ddh, pxh, rvh,
-#             &r5, &d5, &dr5, &dd5, &px5, &rv5);
+    a, e = iauHd2ae(h, d, p)
 
-#    @test isapprox(r5, 1.767794455700065506, 1e-13,
-#        "iauH2fk5", "ra", status);
-#    @test isapprox(d5, -0.2917513626469638890, 1e-13,
-#        "iauH2fk5", "dec", status);
-#    @test isapprox(dr5, -0.27597945024511204e-5, 1e-18,
-#        "iauH2fk5", "dr5", status);
-#    @test isapprox(dd5, -0.59308014093262838e-5, 1e-18,
-#        "iauH2fk5", "dd5", status);
-#    @test isapprox(px5, 0.37921, 1e-13,
-#        "iauH2fk5", "px", status);
-#    @test isapprox(rv5, -7.6000001309071126, 1e-11,
-#        "iauH2fk5", "rv", status);
-# end
+    @test isapprox(a, 5.916889243730066194, atol=1e-13)
+    @test isapprox(e, 0.4472186304990486228, atol=1e-14)
+end
 
-# let
-#    double h, d, p, a, e;
+let
+    h = 1.1
+    d = 1.2
+    p = 0.3
 
+    q = iauHd2pa(h, d, p)
 
-#    h = 1.1;
-#    d = 1.2;
-#    p = 0.3;
+    @test isapprox(q, 1.906227428001995580, atol=1e-13)
+end
 
-#    iauHd2ae(h, d, p, &a, &e);
+let
+   rh =  1.767794352
+   dh = -0.2917512594
 
-#    @test isapprox(a, 5.916889243730066194, 1e-13, "iauHd2ae", "a", status);
-#    @test isapprox(e, 0.4472186304990486228, 1e-14, "iauHd2ae", "e", status);
-# end
+   r5, d5, dr5, dd5 = iauHfk5z(rh, dh, 2400000.5, 54479.0)
 
-# let
-#    double h, d, p, q;
-
-
-#    h = 1.1;
-#    d = 1.2;
-#    p = 0.3;
-
-#    q = iauHd2pa(h, d, p);
-
-#    @test isapprox(q, 1.906227428001995580, 1e-13, "iauHd2pa", "q", status);
-# end
-
-# let
-#    double rh, dh, r5, d5, dr5, dd5;
-
-
-
-#    rh =  1.767794352;
-#    dh = -0.2917512594;
-
-#    iauHfk5z(rh, dh, 2400000.5, 54479.0, &r5, &d5, &dr5, &dd5);
-
-#    @test isapprox(r5, 1.767794490535581026, 1e-13,
-#        "iauHfk5z", "ra", status);
-#    @test isapprox(d5, -0.2917513695320114258, 1e-14,
-#        "iauHfk5z", "dec", status);
-#    @test isapprox(dr5, 0.4335890983539243029e-8, 1e-22,
-#        "iauHfk5z", "dr5", status);
-#    @test isapprox(dd5, -0.8569648841237745902e-9, 1e-23,
-#        "iauHfk5z", "dd5", status);
-# end
+   @test isapprox(r5, 1.767794490535581026, atol=1e-13)
+   @test isapprox(d5, -0.2917513695320114258, atol=1e-14)
+   @test isapprox(dr5, 0.4335890983539243029e-8, atol=1e-22)
+   @test isapprox(dd5, -0.8569648841237745902e-9, atol=1e-23)
+end
 
 let
    r = iauIr()
@@ -1942,80 +1869,44 @@ let
     @test j == 0
 end
 
-# let
-# {
-#    double bm, p[3], q[3], e[3], em, dlim, p1[3];
+let
+    bm   = 0.00028574
+    p    = [-0.763276255, -0.608633767, -0.216735543]
+    q    = [-0.763276255, -0.608633767, -0.216735543]
+    e    = [0.76700421, 0.605629598, 0.211937094]
+    em   = 8.91276983
+    dlim = 3e-10
 
+    p1 = iauLd(bm, p, q, e, em, dlim)
 
-#    bm = 0.00028574;
-#    p[0] = -0.763276255;
-#    p[1] = -0.608633767;
-#    p[2] = -0.216735543;
-#    q[0] = -0.763276255;
-#    q[1] = -0.608633767;
-#    q[2] = -0.216735543;
-#    e[0] = 0.76700421;
-#    e[1] = 0.605629598;
-#    e[2] = 0.211937094;
-#    em = 8.91276983;
-#    dlim = 3e-10;
-
-#    iauLd(bm, p, q, e, em, dlim, p1);
-
-#    @test isapprox(p1[0], -0.7632762548968159627, 1e-12,
-#                "iauLd", "1", status);
-#    @test isapprox(p1[1], -0.6086337670823762701, 1e-12,
-#                "iauLd", "2", status);
-#    @test isapprox(p1[2], -0.2167355431320546947, 1e-12,
-#                "iauLd", "3", status);
-# end
+    @test isapprox(p1[1], -0.7632762548968159627, atol=1e-12)
+    @test isapprox(p1[2], -0.6086337670823762701, atol=1e-12)
+    @test isapprox(p1[3], -0.2167355431320546947, atol=1e-12)
+end
 
 # let
-#    int n;
-#    iauLDBODY b[3];
-#    double ob[3], sc[3], sn[3];
+#     n = 3;
+#     b = [iauLDBODY(), iauLDBODY(), iauLDBODY()]
+#     b[1].bm = 0.00028574
+#     b[1].dl = 3e-10
+#     b[1].pv = [-7.81014427 -5.60956681 -1.98079819;
+#                 0.0030723249 -0.00406995477 -0.00181335842]
+#     b[2].bm = 0.00095435
+#     b[2].dl = 3e-9
+#     b[2].pv = [0.738098796 4.63658692 1.9693136;
+#               -0.00755816922 0.00126913722 0.000727999001]
+#     b[3].bm = 1.0
+#     b[3].dl = 6e-6
+#     b[2].pv = [-0.000712174377 -0.00230478303 -0.00105865966;
+#                 6.29235213e-6 -3.30888387e-7 -2.96486623e-7]
+#     ob = [-0.974170437, -0.2115201, -0.0917583114]
+#     sc = [-0.763276255, -0.608633767, -0.216735543]
 
+#     sn = iauLdn(n, b, ob, sc)
 
-#    n = 3;
-#    b[0].bm = 0.00028574;
-#    b[0].dl = 3e-10;
-#    b[0].pv[0][0] = -7.81014427;
-#    b[0].pv[0][1] = -5.60956681;
-#    b[0].pv[0][2] = -1.98079819;
-#    b[0].pv[1][0] =  0.0030723249;
-#    b[0].pv[1][1] = -0.00406995477;
-#    b[0].pv[1][2] = -0.00181335842;
-#    b[1].bm = 0.00095435;
-#    b[1].dl = 3e-9;
-#    b[1].pv[0][0] =  0.738098796;
-#    b[1].pv[0][1] =  4.63658692;
-#    b[1].pv[0][2] =  1.9693136;
-#    b[1].pv[1][0] = -0.00755816922;
-#    b[1].pv[1][1] =  0.00126913722;
-#    b[1].pv[1][2] =  0.000727999001;
-#    b[2].bm = 1.0;
-#    b[2].dl = 6e-6;
-#    b[2].pv[0][0] = -0.000712174377;
-#    b[2].pv[0][1] = -0.00230478303;
-#    b[2].pv[0][2] = -0.00105865966;
-#    b[2].pv[1][0] =  6.29235213e-6;
-#    b[2].pv[1][1] = -3.30888387e-7;
-#    b[2].pv[1][2] = -2.96486623e-7;
-#    ob[0] =  -0.974170437;
-#    ob[1] =  -0.2115201;
-#    ob[2] =  -0.0917583114;
-#    sc[0] =  -0.763276255;
-#    sc[1] =  -0.608633767;
-#    sc[2] =  -0.216735543;
-
-#    iauLdn(n, b, ob, sc, sn);
-
-#    @test isapprox(sn[0], -0.7632762579693333866, 1e-12,
-#                "iauLdn", "1", status);
-#    @test isapprox(sn[1], -0.6086337636093002660, 1e-12,
-#                "iauLdn", "2", status);
-#    @test isapprox(sn[2], -0.2167355420646328159, 1e-12,
-#                "iauLdn", "3", status);
+#     @test isapprox(sn[1], -0.7632762579693333866, atol=1e-12)
+#     @test isapprox(sn[2], -0.6086337636093002660, atol=1e-12)
+#     @test isapprox(sn[3], -0.2167355420646328159, atol=1e-12)
 # end
 
 let
@@ -2030,149 +1921,95 @@ let
     @test isapprox(p1[3], -0.2167355419322321302, atol=1e-12)
 end
 
-# let
-#    double epj, dl, db, dr, dd;
+let
+    epj = 2500.0
+    dl = 1.5
+    db = 0.6
 
+    dr, dd = iauLteceq(epj, dl, db)
 
-#    epj = 2500.0;
-#    dl = 1.5;
-#    db = 0.6;
+    @test isapprox(dr, 1.275156021861921167, atol=1e-14)
+    @test isapprox(dd, 0.9966573543519204791, atol=1e-14)
+end
 
-#    iauLteceq(epj, dl, db, &dr, &dd);
+let
+    epj = -3000.0
 
-#    @test isapprox(dr, 1.275156021861921167, 1e-14, "iauLteceq", "dr", status);
-#    @test isapprox(dd, 0.9966573543519204791, 1e-14, "iauLteceq", "dd", status);
-# end
+    rm = iauLtecm(epj)
 
-# let
-#    double epj, rm[3][3];
+    @test isapprox(rm[1, 1], 0.3564105644859788825, atol=1e-14)
+    @test isapprox(rm[1, 2], 0.8530575738617682284, atol=1e-14)
+    @test isapprox(rm[1, 3], 0.3811355207795060435, atol=1e-14)
+    @test isapprox(rm[2, 1], -0.9343283469640709942, atol=1e-14)
+    @test isapprox(rm[2, 2], 0.3247830597681745976, atol=1e-14)
+    @test isapprox(rm[2, 3], 0.1467872751535940865, atol=1e-14)
+    @test isapprox(rm[3, 1], 0.1431636191201167793e-2, atol=1e-14)
+    @test isapprox(rm[3, 2], -0.4084222566960599342, atol=1e-14)
+    @test isapprox(rm[3, 3], 0.9127919865189030899, atol=1e-14)
+end
 
+let
+    epj = -1500.0
+    dr = 1.234
+    dd = 0.987
 
-#    epj = -3000.0;
+    dl, db = iauLteqec(epj, dr, dd)
 
-#    iauLtecm(epj, rm);
+    @test isapprox(dl, 0.5039483649047114859, atol=1e-14)
+    @test isapprox(db, 0.5848534459726224882, atol=1e-14)
+end
 
-#    @test isapprox(rm[0][0], 0.3564105644859788825, 1e-14,
-#        "iauLtecm", "rm11", status);
-#    @test isapprox(rm[0][1], 0.8530575738617682284, 1e-14,
-#        "iauLtecm", "rm12", status);
-#    @test isapprox(rm[0][2], 0.3811355207795060435, 1e-14,
-#        "iauLtecm", "rm13", status);
-#    @test isapprox(rm[1][0], -0.9343283469640709942, 1e-14,
-#        "iauLtecm", "rm21", status);
-#    @test isapprox(rm[1][1], 0.3247830597681745976, 1e-14,
-#        "iauLtecm", "rm22", status);
-#    @test isapprox(rm[1][2], 0.1467872751535940865, 1e-14,
-#        "iauLtecm", "rm23", status);
-#    @test isapprox(rm[2][0], 0.1431636191201167793e-2, 1e-14,
-#        "iauLtecm", "rm31", status);
-#    @test isapprox(rm[2][1], -0.4084222566960599342, 1e-14,
-#        "iauLtecm", "rm32", status);
-#    @test isapprox(rm[2][2], 0.9127919865189030899, 1e-14,
-#        "iauLtecm", "rm33", status);
-# end
+let
+    epj = 1666.666
 
-# let
-#    double epj, dr, dd, dl, db;
+    rp = iauLtp(epj)
 
+    @test isapprox(rp[1, 1], 0.9967044141159213819, atol=1e-14)
+    @test isapprox(rp[1, 2], 0.7437801893193210840e-1, atol=1e-14)
+    @test isapprox(rp[1, 3], 0.3237624409345603401e-1, atol=1e-14)
+    @test isapprox(rp[2, 1], -0.7437802731819618167e-1, atol=1e-14)
+    @test isapprox(rp[2, 2], 0.9972293894454533070, atol=1e-14)
+    @test isapprox(rp[2, 3], -0.1205768842723593346e-2, atol=1e-14)
+    @test isapprox(rp[3, 1], -0.3237622482766575399e-1, atol=1e-14)
+    @test isapprox(rp[3, 2], -0.1206286039697609008e-2, atol=1e-14)
+    @test isapprox(rp[3, 3], 0.9994750246704010914, atol=1e-14)
+end
 
-#    epj = -1500.0;
-#    dr = 1.234;
-#    dd = 0.987;
+let
+    epj = 1666.666
 
-#    iauLteqec(epj, dr, dd, &dl, &db);
+    rpb = iauLtpb(epj)
 
-#    @test isapprox(dl, 0.5039483649047114859, 1e-14, "iauLteqec", "dl", status);
-#    @test isapprox(db, 0.5848534459726224882, 1e-14, "iauLteqec", "db", status);
-# end
+    @test isapprox(rpb[1, 1], 0.9967044167723271851, atol=1e-14)
+    @test isapprox(rpb[1, 2], 0.7437794731203340345e-1, atol=1e-14)
+    @test isapprox(rpb[1, 3], 0.3237632684841625547e-1, atol=1e-14)
+    @test isapprox(rpb[2, 1], -0.7437795663437177152e-1, atol=1e-14)
+    @test isapprox(rpb[2, 2], 0.9972293947500013666, atol=1e-14)
+    @test isapprox(rpb[2, 3], -0.1205741865911243235e-2, atol=1e-14)
+    @test isapprox(rpb[3, 1], -0.3237630543224664992e-1, atol=1e-14)
+    @test isapprox(rpb[3, 2], -0.1206316791076485295e-2, atol=1e-14)
+    @test isapprox(rpb[3, 3], 0.9994750220222438819, atol=1e-14)
+end
 
-# let
-#    double epj, rp[3][3];
+let
+    epj = -1500.0;
 
+    vec = iauLtpecl(epj)
 
-#    epj = 1666.666;
+    @test isapprox(vec[1], 0.4768625676477096525e-3, atol=1e-14)
+    @test isapprox(vec[2], -0.4052259533091875112, atol=1e-14)
+    @test isapprox(vec[3], 0.9142164401096448012, atol=1e-14)
+end
 
-#    iauLtp(epj, rp);
+let
+    epj = -2500.0
 
-#    @test isapprox(rp[0][0], 0.9967044141159213819, 1e-14,
-#        "iauLtp", "rp11", status);
-#    @test isapprox(rp[0][1], 0.7437801893193210840e-1, 1e-14,
-#        "iauLtp", "rp12", status);
-#    @test isapprox(rp[0][2], 0.3237624409345603401e-1, 1e-14,
-#        "iauLtp", "rp13", status);
-#    @test isapprox(rp[1][0], -0.7437802731819618167e-1, 1e-14,
-#        "iauLtp", "rp21", status);
-#    @test isapprox(rp[1][1], 0.9972293894454533070, 1e-14,
-#        "iauLtp", "rp22", status);
-#    @test isapprox(rp[1][2], -0.1205768842723593346e-2, 1e-14,
-#        "iauLtp", "rp23", status);
-#    @test isapprox(rp[2][0], -0.3237622482766575399e-1, 1e-14,
-#        "iauLtp", "rp31", status);
-#    @test isapprox(rp[2][1], -0.1206286039697609008e-2, 1e-14,
-#        "iauLtp", "rp32", status);
-#    @test isapprox(rp[2][2], 0.9994750246704010914, 1e-14,
-#        "iauLtp", "rp33", status);
-# end
+    veq = iauLtpequ(epj)
 
-# let
-#    double epj, rpb[3][3];
-
-
-#    epj = 1666.666;
-
-#    iauLtpb(epj, rpb);
-
-#    @test isapprox(rpb[0][0], 0.9967044167723271851, 1e-14,
-#        "iauLtpb", "rpb11", status);
-#    @test isapprox(rpb[0][1], 0.7437794731203340345e-1, 1e-14,
-#        "iauLtpb", "rpb12", status);
-#    @test isapprox(rpb[0][2], 0.3237632684841625547e-1, 1e-14,
-#        "iauLtpb", "rpb13", status);
-#    @test isapprox(rpb[1][0], -0.7437795663437177152e-1, 1e-14,
-#        "iauLtpb", "rpb21", status);
-#    @test isapprox(rpb[1][1], 0.9972293947500013666, 1e-14,
-#        "iauLtpb", "rpb22", status);
-#    @test isapprox(rpb[1][2], -0.1205741865911243235e-2, 1e-14,
-#        "iauLtpb", "rpb23", status);
-#    @test isapprox(rpb[2][0], -0.3237630543224664992e-1, 1e-14,
-#        "iauLtpb", "rpb31", status);
-#    @test isapprox(rpb[2][1], -0.1206316791076485295e-2, 1e-14,
-#        "iauLtpb", "rpb32", status);
-#    @test isapprox(rpb[2][2], 0.9994750220222438819, 1e-14,
-#        "iauLtpb", "rpb33", status);
-# end
-
-# let
-#    double epj, vec[3];
-
-
-#    epj = -1500.0;
-
-#    iauLtpecl(epj, vec);
-
-#    @test isapprox(vec[0], 0.4768625676477096525e-3, 1e-14,
-#        "iauLtpecl", "vec1", status);
-#    @test isapprox(vec[1], -0.4052259533091875112, 1e-14,
-#        "iauLtpecl", "vec2", status);
-#    @test isapprox(vec[2], 0.9142164401096448012, 1e-14,
-#        "iauLtpecl", "vec3", status);
-# end
-
-# let
-#    double epj, veq[3];
-
-
-#    epj = -2500.0;
-
-#    iauLtpequ(epj, veq);
-
-#    @test isapprox(veq[0], -0.3586652560237326659, 1e-14,
-#        "iauLtpequ", "veq1", status);
-#    @test isapprox(veq[1], -0.1996978910771128475, 1e-14,
-#        "iauLtpequ", "veq2", status);
-#    @test isapprox(veq[2], 0.9118552442250819624, 1e-14,
-#        "iauLtpequ", "veq3", status);
-# end
+    @test isapprox(veq[1], -0.3586652560237326659, atol=1e-14)
+    @test isapprox(veq[2], -0.1996978910771128475, atol=1e-14)
+    @test isapprox(veq[3], 0.9118552442250819624, atol=1e-14)
+end
 
 let
     rmatn = iauNum00a(2400000.5, 53736.0)
@@ -2975,436 +2812,263 @@ let
     @test isapprox(rpom[3, 3], 0.9999999999982370039, atol=1e-12)
 end
 
-# let
-#    double a[3], b[3], apb[3];
+let
+    a = [2.0, 2.0, 3.0]
+    b = [1.0, 3.0, 4.0]
 
+    apb = iauPpp(a, b)
 
-#    a[0] = 2.0;
-#    a[1] = 2.0;
-#    a[2] = 3.0;
+    @test isapprox(apb[1], 3.0, atol=1e-12)
+    @test isapprox(apb[2], 5.0, atol=1e-12)
+    @test isapprox(apb[3], 7.0, atol=1e-12)
+end
 
-#    b[0] = 1.0;
-#    b[1] = 3.0;
-#    b[2] = 4.0;
+let
+    a = [2.0, 2.0, 3.0]
+    s = 5.0
+    b = [1.0, 3.0, 4.0]
 
-#    iauPpp(a, b, apb);
+    apsb = iauPpsp(a, s, b)
 
-#    @test isapprox(apb[0], 3.0, 1e-12, "iauPpp", "0", status);
-#    @test isapprox(apb[1], 5.0, 1e-12, "iauPpp", "1", status);
-#    @test isapprox(apb[2], 7.0, 1e-12, "iauPpp", "2", status);
-# end
+    @test isapprox(apsb[1], 7.0, atol=1e-12)
+    @test isapprox(apsb[2], 17.0, atol=1e-12)
+    @test isapprox(apsb[3], 23.0, atol=1e-12)
+end
 
-# let
-#    double a[3], s, b[3], apsb[3];
+let
+    dpsipr, depspr = iauPr00(2400000.5, 53736)
 
+    @test isapprox(dpsipr, -0.8716465172668347629e-7, atol=1e-22)
+    @test isapprox(depspr, -0.7342018386722813087e-8, atol=1e-22)
+end
 
-#    a[0] = 2.0;
-#    a[1] = 2.0;
-#    a[2] = 3.0;
+let
+    ep01 = 2400000.5
+    ep02 = 33282.0
+    ep11 = 2400000.5
+    ep12 = 51544.0
 
-#    s = 5.0;
+    zeta, z, theta = iauPrec76(ep01, ep02, ep11, ep12)
 
-#    b[0] = 1.0;
-#    b[1] = 3.0;
-#    b[2] = 4.0;
+    @test isapprox(zeta,  0.5588961642000161243e-2, atol=1e-12)
+    @test isapprox(z,     0.5589922365870680624e-2, atol=1e-12)
+    @test isapprox(theta, 0.4858945471687296760e-2, atol=1e-12)
+end
 
-#    iauPpsp(a, s, b, apsb);
+let
+    pv = [0.3 1.2 -2.5;
+         -0.5 3.1 0.9]
 
-#    @test isapprox(apsb[0], 7.0, 1e-12, "iauPpsp", "0", status);
-#    @test isapprox(apsb[1], 17.0, 1e-12, "iauPpsp", "1", status);
-#    @test isapprox(apsb[2], 23.0, 1e-12, "iauPpsp", "2", status);
-# end
+    p = iauPv2p(pv)
 
-# let
-#    double dpsipr, depspr;
+    @test p[1] ==  0.3
+    @test p[2] ==  1.2
+    @test p[3] == -2.5
+end
+
+let
+    pv = [-0.4514964673880165  0.03093394277342585 0.05594668105108779;
+           1.292270850663260e-5 2.652814182060692e-6 2.568431853930293e-6]
+
+    theta, phi, r, td, pd, rd = iauPv2s(pv)
+
+    @test isapprox(theta, 3.073185307179586515, atol=1e-12)
+    @test isapprox(phi, 0.1229999999999999992, atol=1e-12)
+    @test isapprox(r, 0.4559999999999999757, atol=1e-12)
+    @test isapprox(td, -0.7800000000000000364e-5, atol=1e-16)
+    @test isapprox(pd, 0.9010000000000001639e-5, atol=1e-16)
+    @test isapprox(rd, -0.1229999999999999832e-4, atol=1e-16)
+end
+
+let
+    a = [2.0 2.0 3.0;
+        6.0 0.0 4.0]
+   
+    b = [1.0 3.0 4.0;
+         0.0 2.0 8.0]
+
+    adb = iauPvdpv(a, b)
+
+    @test isapprox(adb[1], 20.0, atol=1e-12)
+    @test isapprox(adb[2], 50.0, atol=1e-12)
+end
+
+let
+    pv = [0.3 1.2 -2.5;
+          0.45 -0.25 1.1]
 
-#    iauPr00(2400000.5, 53736, &dpsipr, &depspr);
-
-#    @test isapprox(dpsipr, -0.8716465172668347629e-7, 1e-22,
-#       "iauPr00", "dpsipr", status);
-#    @test isapprox(depspr, -0.7342018386722813087e-8, 1e-22,
-#       "iauPr00", "depspr", status);
-# end
-
-# let
-#    double ep01, ep02, ep11, ep12, zeta, z, theta;
-
-
-#    ep01 = 2400000.5;
-#    ep02 = 33282.0;
-#    ep11 = 2400000.5;
-#    ep12 = 51544.0;
-
-#    iauPrec76(ep01, ep02, ep11, ep12, &zeta, &z, &theta);
-
-#    @test isapprox(zeta,  0.5588961642000161243e-2, 1e-12,
-#        "iauPrec76", "zeta",  status);
-#    @test isapprox(z,     0.5589922365870680624e-2, 1e-12,
-#        "iauPrec76", "z",     status);
-#    @test isapprox(theta, 0.4858945471687296760e-2, 1e-12,
-#        "iauPrec76", "theta", status);
-# end
-
-# let
-#    double pv[2][3], p[3];
-
-
-#    pv[0][0] =  0.3;
-#    pv[0][1] =  1.2;
-#    pv[0][2] = -2.5;
-
-#    pv[1][0] = -0.5;
-#    pv[1][1] =  3.1;
-#    pv[1][2] =  0.9;
-
-#    iauPv2p(pv, p);
-
-#    @test isapprox(p[0],  0.3, 0.0, "iauPv2p", "1", status);
-#    @test isapprox(p[1],  1.2, 0.0, "iauPv2p", "2", status);
-#    @test isapprox(p[2], -2.5, 0.0, "iauPv2p", "3", status);
-# end
-
-# let
-#    double pv[2][3], theta, phi, r, td, pd, rd;
-
-
-#    pv[0][0] = -0.4514964673880165;
-#    pv[0][1] =  0.03093394277342585;
-#    pv[0][2] =  0.05594668105108779;
-
-#    pv[1][0] =  1.292270850663260e-5;
-#    pv[1][1] =  2.652814182060692e-6;
-#    pv[1][2] =  2.568431853930293e-6;
-
-#    iauPv2s(pv, &theta, &phi, &r, &td, &pd, &rd);
-
-#    @test isapprox(theta, 3.073185307179586515, 1e-12, "iauPv2s", "theta", status);
-#    @test isapprox(phi, 0.1229999999999999992, 1e-12, "iauPv2s", "phi", status);
-#    @test isapprox(r, 0.4559999999999999757, 1e-12, "iauPv2s", "r", status);
-#    @test isapprox(td, -0.7800000000000000364e-5, 1e-16, "iauPv2s", "td", status);
-#    @test isapprox(pd, 0.9010000000000001639e-5, 1e-16, "iauPv2s", "pd", status);
-#    @test isapprox(rd, -0.1229999999999999832e-4, 1e-16, "iauPv2s", "rd", status);
-# end
-
-# let
-#    double a[2][3], b[2][3], adb[2];
-
-
-#    a[0][0] = 2.0;
-#    a[0][1] = 2.0;
-#    a[0][2] = 3.0;
-
-#    a[1][0] = 6.0;
-#    a[1][1] = 0.0;
-#    a[1][2] = 4.0;
-
-#    b[0][0] = 1.0;
-#    b[0][1] = 3.0;
-#    b[0][2] = 4.0;
-
-#    b[1][0] = 0.0;
-#    b[1][1] = 2.0;
-#    b[1][2] = 8.0;
-
-#    iauPvdpv(a, b, adb);
-
-#    @test isapprox(adb[0], 20.0, 1e-12, "iauPvdpv", "1", status);
-#    @test isapprox(adb[1], 50.0, 1e-12, "iauPvdpv", "2", status);
-# end
-
-# let
-#    double pv[2][3], r, s;
-
-
-#    pv[0][0] =  0.3;
-#    pv[0][1] =  1.2;
-#    pv[0][2] = -2.5;
-
-#    pv[1][0] =  0.45;
-#    pv[1][1] = -0.25;
-#    pv[1][2] =  1.1;
-
-#    iauPvm(pv, &r, &s);
-
-#    @test isapprox(r, 2.789265136196270604, 1e-12, "iauPvm", "r", status);
-#    @test isapprox(s, 1.214495780149111922, 1e-12, "iauPvm", "s", status);
-# end
-
-# let
-#    double a[2][3], b[2][3], amb[2][3];
-
-
-#    a[0][0] = 2.0;
-#    a[0][1] = 2.0;
-#    a[0][2] = 3.0;
-
-#    a[1][0] = 5.0;
-#    a[1][1] = 6.0;
-#    a[1][2] = 3.0;
-
-#    b[0][0] = 1.0;
-#    b[0][1] = 3.0;
-#    b[0][2] = 4.0;
-
-#    b[1][0] = 3.0;
-#    b[1][1] = 2.0;
-#    b[1][2] = 1.0;
-
-#    iauPvmpv(a, b, amb);
-
-#    @test isapprox(amb[0][0],  1.0, 1e-12, "iauPvmpv", "11", status);
-#    @test isapprox(amb[0][1], -1.0, 1e-12, "iauPvmpv", "21", status);
-#    @test isapprox(amb[0][2], -1.0, 1e-12, "iauPvmpv", "31", status);
-
-#    @test isapprox(amb[1][0],  2.0, 1e-12, "iauPvmpv", "12", status);
-#    @test isapprox(amb[1][1],  4.0, 1e-12, "iauPvmpv", "22", status);
-#    @test isapprox(amb[1][2],  2.0, 1e-12, "iauPvmpv", "32", status);
-# end
-
-# let
-#    double a[2][3], b[2][3], apb[2][3];
-
-
-#    a[0][0] = 2.0;
-#    a[0][1] = 2.0;
-#    a[0][2] = 3.0;
-
-#    a[1][0] = 5.0;
-#    a[1][1] = 6.0;
-#    a[1][2] = 3.0;
-
-#    b[0][0] = 1.0;
-#    b[0][1] = 3.0;
-#    b[0][2] = 4.0;
-
-#    b[1][0] = 3.0;
-#    b[1][1] = 2.0;
-#    b[1][2] = 1.0;
-
-#    iauPvppv(a, b, apb);
-
-#    @test isapprox(apb[0][0], 3.0, 1e-12, "iauPvppv", "p1", status);
-#    @test isapprox(apb[0][1], 5.0, 1e-12, "iauPvppv", "p2", status);
-#    @test isapprox(apb[0][2], 7.0, 1e-12, "iauPvppv", "p3", status);
-
-#    @test isapprox(apb[1][0], 8.0, 1e-12, "iauPvppv", "v1", status);
-#    @test isapprox(apb[1][1], 8.0, 1e-12, "iauPvppv", "v2", status);
-#    @test isapprox(apb[1][2], 4.0, 1e-12, "iauPvppv", "v3", status);
-# end
-
-# let
-#    double pv[2][3], ra, dec, pmr, pmd, px, rv;
-#    int j;
-
-
-#    pv[0][0] =  126668.5912743160601;
-#    pv[0][1] =  2136.792716839935195;
-#    pv[0][2] = -245251.2339876830091;
-
-#    pv[1][0] = -0.4051854035740712739e-2;
-#    pv[1][1] = -0.6253919754866173866e-2;
-#    pv[1][2] =  0.1189353719774107189e-1;
-
-#    j = iauPvstar(pv, &ra, &dec, &pmr, &pmd, &px, &rv);
-
-#    @test isapprox(ra, 0.1686756e-1, 1e-12, "iauPvstar", "ra", status);
-#    @test isapprox(dec, -1.093989828, 1e-12, "iauPvstar", "dec", status);
-#    @test isapprox(pmr, -0.1783235160000472788e-4, 1e-16, "iauPvstar", "pmr", status);
-#    @test isapprox(pmd, 0.2336024047000619347e-5, 1e-16, "iauPvstar", "pmd", status);
-#    @test isapprox(px, 0.74723, 1e-12, "iauPvstar", "px", status);
-#    @test isapprox(rv, -21.60000010107306010, 1e-11, "iauPvstar", "rv", status);
-
-#    @test j == 0
-# end
-
-# let
-#    double elong, phi, hm, xp, yp, sp, theta, pv[2][3];
-
-
-#    elong = 2.0;
-#    phi = 0.5;
-#    hm = 3000.0;
-#    xp = 1e-6;
-#    yp = -0.5e-6;
-#    sp = 1e-8;
-#    theta = 5.0;
-
-#    iauPvtob(elong, phi, hm, xp, yp, sp, theta, pv);
-
-#    @test isapprox(pv[0][0], 4225081.367071159207, 1e-5,
-#                  "iauPvtob", "p(1)", status);
-#    @test isapprox(pv[0][1], 3681943.215856198144, 1e-5,
-#                  "iauPvtob", "p(2)", status);
-#    @test isapprox(pv[0][2], 3041149.399241260785, 1e-5,
-#                  "iauPvtob", "p(3)", status);
-#    @test isapprox(pv[1][0], -268.4915389365998787, 1e-9,
-#                  "iauPvtob", "v(1)", status);
-#    @test isapprox(pv[1][1], 308.0977983288903123, 1e-9,
-#                  "iauPvtob", "v(2)", status);
-#    @test isapprox(pv[1][2], 0, 0,
-#                  "iauPvtob", "v(3)", status);
-# end
-
-# let
-#    double pv[2][3], upv[2][3];
-
-
-#    pv[0][0] =  126668.5912743160734;
-#    pv[0][1] =  2136.792716839935565;
-#    pv[0][2] = -245251.2339876830229;
-
-#    pv[1][0] = -0.4051854035740713039e-2;
-#    pv[1][1] = -0.6253919754866175788e-2;
-#    pv[1][2] =  0.1189353719774107615e-1;
-
-#    iauPvu(2920.0, pv, upv);
-
-#    @test isapprox(upv[0][0], 126656.7598605317105, 1e-12,
-#        "iauPvu", "p1", status);
-#    @test isapprox(upv[0][1], 2118.531271155726332, 1e-12,
-#        "iauPvu", "p2", status);
-#    @test isapprox(upv[0][2], -245216.5048590656190, 1e-12,
-#        "iauPvu", "p3", status);
-
-#    @test isapprox(upv[1][0], -0.4051854035740713039e-2, 1e-12,
-#        "iauPvu", "v1", status);
-#    @test isapprox(upv[1][1], -0.6253919754866175788e-2, 1e-12,
-#        "iauPvu", "v2", status);
-#    @test isapprox(upv[1][2], 0.1189353719774107615e-1, 1e-12,
-#        "iauPvu", "v3", status);
-# end
-
-# let
-#    double pv[2][3], p[3];
-
-
-#    pv[0][0] =  126668.5912743160734;
-#    pv[0][1] =  2136.792716839935565;
-#    pv[0][2] = -245251.2339876830229;
-
-#    pv[1][0] = -0.4051854035740713039e-2;
-#    pv[1][1] = -0.6253919754866175788e-2;
-#    pv[1][2] =  0.1189353719774107615e-1;
-
-#    iauPvup(2920.0, pv, p);
-
-#    @test isapprox(p[0],  126656.7598605317105,   1e-12, "iauPvup", "1", status);
-#    @test isapprox(p[1],    2118.531271155726332, 1e-12, "iauPvup", "2", status);
-#    @test isapprox(p[2], -245216.5048590656190,   1e-12, "iauPvup", "3", status);
-# end
-
-# let
-#    double a[2][3], b[2][3], axb[2][3];
-
-
-#    a[0][0] = 2.0;
-#    a[0][1] = 2.0;
-#    a[0][2] = 3.0;
-
-#    a[1][0] = 6.0;
-#    a[1][1] = 0.0;
-#    a[1][2] = 4.0;
-
-#    b[0][0] = 1.0;
-#    b[0][1] = 3.0;
-#    b[0][2] = 4.0;
-
-#    b[1][0] = 0.0;
-#    b[1][1] = 2.0;
-#    b[1][2] = 8.0;
-
-#    iauPvxpv(a, b, axb);
-
-#    @test isapprox(axb[0][0],  -1.0, 1e-12, "iauPvxpv", "p1", status);
-#    @test isapprox(axb[0][1],  -5.0, 1e-12, "iauPvxpv", "p2", status);
-#    @test isapprox(axb[0][2],   4.0, 1e-12, "iauPvxpv", "p3", status);
-
-#    @test isapprox(axb[1][0],  -2.0, 1e-12, "iauPvxpv", "v1", status);
-#    @test isapprox(axb[1][1], -36.0, 1e-12, "iauPvxpv", "v2", status);
-#    @test isapprox(axb[1][2],  22.0, 1e-12, "iauPvxpv", "v3", status);
-# end
-
-# let
-#    double a[3], b[3], axb[3];
-
-
-#    a[0] = 2.0;
-#    a[1] = 2.0;
-#    a[2] = 3.0;
-
-#    b[0] = 1.0;
-#    b[1] = 3.0;
-#    b[2] = 4.0;
-
-#    iauPxp(a, b, axb);
-
-#    @test isapprox(axb[0], -1.0, 1e-12, "iauPxp", "1", status);
-#    @test isapprox(axb[1], -5.0, 1e-12, "iauPxp", "2", status);
-#    @test isapprox(axb[2],  4.0, 1e-12, "iauPxp", "3", status);
-# end
-
-# let
-#    double phpa, tc, rh, wl, refa, refb;
-
-
-#    phpa = 800.0;
-#    tc = 10.0;
-#    rh = 0.9;
-#    wl = 0.4;
-
-#    iauRefco(phpa, tc, rh, wl, &refa, &refb);
-
-#    @test isapprox(refa, 0.2264949956241415009e-3, 1e-15,
-#              "iauRefco", "refa", status);
-#    @test isapprox(refb, -0.2598658261729343970e-6, 1e-18,
-#              "iauRefco", "refb", status);
-# end
-
-# let
-#    double r[3][3], w[3];
-
-
-#    r[0][0] =  0.00;
-#    r[0][1] = -0.80;
-#    r[0][2] = -0.60;
-
-#    r[1][0] =  0.80;
-#    r[1][1] = -0.36;
-#    r[1][2] =  0.48;
-
-#    r[2][0] =  0.60;
-#    r[2][1] =  0.48;
-#    r[2][2] = -0.64;
-
-#    iauRm2v(r, w);
-
-#    @test isapprox(w[0],  0.0,                  1e-12, "iauRm2v", "1", status);
-#    @test isapprox(w[1],  1.413716694115406957, 1e-12, "iauRm2v", "2", status);
-#    @test isapprox(w[2], -1.884955592153875943, 1e-12, "iauRm2v", "3", status);
-# end
-
-# let
-#    double w[3], r[3][3];
-
-
-#    w[0] =  0.0;
-#    w[1] =  1.41371669;
-#    w[2] = -1.88495559;
-
-#    iauRv2m(w, r);
-
-#    @test isapprox(r[0][0], -0.7071067782221119905, 1e-14, "iauRv2m", "11", status);
-#    @test isapprox(r[0][1], -0.5656854276809129651, 1e-14, "iauRv2m", "12", status);
-#    @test isapprox(r[0][2], -0.4242640700104211225, 1e-14, "iauRv2m", "13", status);
-
-#    @test isapprox(r[1][0],  0.5656854276809129651, 1e-14, "iauRv2m", "21", status);
-#    @test isapprox(r[1][1], -0.0925483394532274246, 1e-14, "iauRv2m", "22", status);
-#    @test isapprox(r[1][2], -0.8194112531408833269, 1e-14, "iauRv2m", "23", status);
-
-#    @test isapprox(r[2][0],  0.4242640700104211225, 1e-14, "iauRv2m", "31", status);
-#    @test isapprox(r[2][1], -0.8194112531408833269, 1e-14, "iauRv2m", "32", status);
-#    @test isapprox(r[2][2],  0.3854415612311154341, 1e-14, "iauRv2m", "33", status);
-# end
+    r, s = iauPvm(pv)
+
+    @test isapprox(r, 2.789265136196270604, atol=1e-12)
+    @test isapprox(s, 1.214495780149111922, atol=1e-12)
+end
+
+let
+    a = [2.0 2.0 3.0;
+         5.0 6.0 3.0]
+
+    b = [1.0 3.0 4.0;
+         3.0 2.0 1.0]
+
+    amb = iauPvmpv(a, b)
+
+    @test isapprox(amb[1, 1],  1.0, atol=1e-12)
+    @test isapprox(amb[1, 2], -1.0, atol=1e-12)
+    @test isapprox(amb[1, 3], -1.0, atol=1e-12)
+
+    @test isapprox(amb[2, 1],  2.0, atol=1e-12)
+    @test isapprox(amb[2, 2],  4.0, atol=1e-12)
+    @test isapprox(amb[2, 3],  2.0, atol=1e-12)
+end
+
+let
+    a = [2.0 2.0 3.0;
+         5.0 6.0 3.0]
+
+    b = [1.0 3.0 4.0;
+         3.0 2.0 1.0]
+
+    apb = iauPvppv(a, b)
+
+    @test isapprox(apb[1, 1], 3.0, atol=1e-12)
+    @test isapprox(apb[1, 2], 5.0, atol=1e-12)
+    @test isapprox(apb[1, 3], 7.0, atol=1e-12)
+
+    @test isapprox(apb[2, 1], 8.0, atol=1e-12)
+    @test isapprox(apb[2, 2], 8.0, atol=1e-12)
+    @test isapprox(apb[2, 3], 4.0, atol=1e-12)
+end
+
+let
+    pv = [126668.5912743160601 2136.792716839935195 -245251.2339876830091;
+         -0.4051854035740712739e-2 -0.6253919754866173866e-2 0.1189353719774107189e-1]
+
+    j, ra, dec, pmr, pmd, px, rv = iauPvstar(pv)
+
+    @test isapprox(ra, 0.1686756e-1, atol=1e-12)
+    @test isapprox(dec, -1.093989828, atol=1e-12)
+    @test isapprox(pmr, -0.1783235160000472788e-4, atol=1e-16)
+    @test isapprox(pmd, 0.2336024047000619347e-5, atol=1e-16)
+    @test isapprox(px, 0.74723, atol=1e-12)
+    @test isapprox(rv, -21.60000010107306010, atol=1e-11)
+
+    @test j == 0
+end
+
+let
+    elong = 2.0
+    phi = 0.5
+    hm = 3000.0
+    xp = 1e-6
+    yp = -0.5e-6
+    sp = 1e-8
+    theta = 5.0
+
+    pv = iauPvtob(elong, phi, hm, xp, yp, sp, theta)
+
+    @test isapprox(pv[1, 1], 4225081.367071159207, atol=1e-5)
+    @test isapprox(pv[1, 2], 3681943.215856198144, atol=1e-5)
+    @test isapprox(pv[1, 3], 3041149.399241260785, atol=1e-5)
+    @test isapprox(pv[2, 1], -268.4915389365998787, atol=1e-9)
+    @test isapprox(pv[2, 2], 308.0977983288903123, atol=1e-9)
+    @test pv[2, 3] == 0
+end
+
+let
+    pv = [126668.5912743160734 2136.792716839935565 -245251.2339876830229;
+          -0.4051854035740713039e-2 -0.6253919754866175788e-2 0.1189353719774107615e-1]
+
+    upv = iauPvu(2920.0, pv)
+
+    @test isapprox(upv[1, 1], 126656.7598605317105, atol=1e-12)
+    @test isapprox(upv[1, 2], 2118.531271155726332, atol=1e-12)
+    @test isapprox(upv[1, 3], -245216.5048590656190, atol=1e-12)
+
+    @test isapprox(upv[2, 1], -0.4051854035740713039e-2, atol=1e-12)
+    @test isapprox(upv[2, 2], -0.6253919754866175788e-2, atol=1e-12)
+    @test isapprox(upv[2, 3], 0.1189353719774107615e-1, atol=1e-12)
+end
+
+let
+    pv = [126668.5912743160734 2136.792716839935565 -245251.2339876830229;
+          -0.4051854035740713039e-2 -0.6253919754866175788e-2 0.1189353719774107615e-1]
+
+    p = iauPvup(2920.0, pv)
+
+    @test isapprox(p[1],  126656.7598605317105,   atol=1e-12)
+    @test isapprox(p[2],    2118.531271155726332, atol=1e-12)
+    @test isapprox(p[3], -245216.5048590656190,   atol=1e-12)
+end
+
+let
+    a = [2.0 2.0 3.0;
+         6.0 0.0 4.0]
+    b = [1.0 3.0 4.0;
+         0.0 2.0 8.0]
+
+    axb = iauPvxpv(a, b)
+
+    @test isapprox(axb[1, 1],  -1.0, atol=1e-12)
+    @test isapprox(axb[1, 2],  -5.0, atol=1e-12)
+    @test isapprox(axb[1, 3],   4.0, atol=1e-12)
+
+    @test isapprox(axb[2, 1],  -2.0, atol=1e-12)
+    @test isapprox(axb[2, 2], -36.0, atol=1e-12)
+    @test isapprox(axb[2, 3],  22.0, atol=1e-12)
+end
+
+let
+    a = [2.0, 2.0, 3.0]
+    b = [1.0, 3.0, 4.0]
+
+    axb = iauPxp(a, b)
+
+    @test isapprox(axb[1], -1.0, atol=1e-12)
+    @test isapprox(axb[2], -5.0, atol=1e-12)
+    @test isapprox(axb[3],  4.0, atol=1e-12)
+end
+
+let
+    phpa = 800.0
+    tc   = 10.0
+    rh   = 0.9
+    wl   = 0.4
+
+    refa, refb = iauRefco(phpa, tc, rh, wl)
+
+    @test isapprox(refa, 0.2264949956241415009e-3, atol=1e-15)
+    @test isapprox(refb, -0.2598658261729343970e-6, atol=1e-18)
+end
+
+let
+    r = [0.00 -0.80 -0.60;
+         0.80 -0.36 0.48;
+         0.60 0.48 -0.64]
+
+    w = iauRm2v(r)
+
+    @test isapprox(w[1],  0.0,                  atol=1e-12)
+    @test isapprox(w[2],  1.413716694115406957, atol=1e-12)
+    @test isapprox(w[3], -1.884955592153875943, atol=1e-12)
+end
+
+let
+    w = [0.0, 1.41371669, -1.88495559]
+
+    r = iauRv2m(w)
+
+    @test isapprox(r[1, 1], -0.7071067782221119905, atol=1e-14)
+    @test isapprox(r[1, 2], -0.5656854276809129651, atol=1e-14)
+    @test isapprox(r[1, 3], -0.4242640700104211225, atol=1e-14)
+
+    @test isapprox(r[2, 1],  0.5656854276809129651, atol=1e-14)
+    @test isapprox(r[2, 2], -0.0925483394532274246, atol=1e-14)
+    @test isapprox(r[2, 3], -0.8194112531408833269, atol=1e-14)
+
+    @test isapprox(r[3, 1],  0.4242640700104211225, atol=1e-14)
+    @test isapprox(r[3, 2], -0.8194112531408833269, atol=1e-14)
+    @test isapprox(r[3, 3],  0.3854415612311154341, atol=1e-14)
+end
 
 let
     phi = 0.3456789
@@ -3428,111 +3092,63 @@ let
     @test isapprox(r[3, 3], 3.687721683977873065, atol=1e-12)
 end
 
-# let
-#    double r[3][3], p[3], rp[3];
+let
+    r = [2.0 3.0 2.0;
+        3.0 2.0 3.0;
+        3.0 4.0 5.0]
 
+    p = [0.2, 1.5, 0.1]
 
-#    r[0][0] = 2.0;
-#    r[0][1] = 3.0;
-#    r[0][2] = 2.0;
+    rp = iauRxp(r, p)
 
-#    r[1][0] = 3.0;
-#    r[1][1] = 2.0;
-#    r[1][2] = 3.0;
+    @test isapprox(rp[1], 5.1, atol=1e-12)
+    @test isapprox(rp[2], 3.9, atol=1e-12)
+    @test isapprox(rp[3], 7.1, atol=1e-12)
+end
 
-#    r[2][0] = 3.0;
-#    r[2][1] = 4.0;
-#    r[2][2] = 5.0;
+let
+    r = [2.0 3.0 2.0;
+        3.0 2.0 3.0;
+        3.0 4.0 5.0]
 
-#    p[0] = 0.2;
-#    p[1] = 1.5;
-#    p[2] = 0.1;
+    pv = [0.2 1.5 0.1;
+          1.5 0.2 0.1]
 
-#    iauRxp(r, p, rp);
+    rpv = iauRxpv(r, pv)
 
-#    @test isapprox(rp[0], 5.1, 1e-12, "iauRxp", "1", status);
-#    @test isapprox(rp[1], 3.9, 1e-12, "iauRxp", "2", status);
-#    @test isapprox(rp[2], 7.1, 1e-12, "iauRxp", "3", status);
-# end
+    @test isapprox(rpv[1, 1], 5.1, atol=1e-12)
+    @test isapprox(rpv[2, 1], 3.8, atol=1e-12)
 
-# let
-#    double r[3][3], pv[2][3], rpv[2][3];
+    @test isapprox(rpv[1, 2], 3.9, atol=1e-12)
+    @test isapprox(rpv[2, 2], 5.2, atol=1e-12)
 
+    @test isapprox(rpv[1, 3], 7.1, atol=1e-12)
+    @test isapprox(rpv[2, 3], 5.8, atol=1e-12)
+end
 
-#    r[0][0] = 2.0;
-#    r[0][1] = 3.0;
-#    r[0][2] = 2.0;
+let
+    a = [2.0 3.0 2.0;
+        3.0 2.0 3.0;
+        3.0 4.0 5.0]
 
-#    r[1][0] = 3.0;
-#    r[1][1] = 2.0;
-#    r[1][2] = 3.0;
+    b = [1.0 2.0 2.0;
+         4.0 1.0 1.0;
+         3.0 0.0 1.0]
 
-#    r[2][0] = 3.0;
-#    r[2][1] = 4.0;
-#    r[2][2] = 5.0;
+    atb = iauRxr(a, b)
 
-#    pv[0][0] = 0.2;
-#    pv[0][1] = 1.5;
-#    pv[0][2] = 0.1;
+    @test isapprox(atb[1, 1], 20.0, atol=1e-12)
+    @test isapprox(atb[1, 2],  7.0, atol=1e-12)
+    @test isapprox(atb[1, 3],  9.0, atol=1e-12)
 
-#    pv[1][0] = 1.5;
-#    pv[1][1] = 0.2;
-#    pv[1][2] = 0.1;
+    @test isapprox(atb[2, 1], 20.0, atol=1e-12)
+    @test isapprox(atb[2, 2],  8.0, atol=1e-12)
+    @test isapprox(atb[2, 3], 11.0, atol=1e-12)
 
-#    iauRxpv(r, pv, rpv);
-
-#    @test isapprox(rpv[0][0], 5.1, 1e-12, "iauRxpv", "11", status);
-#    @test isapprox(rpv[1][0], 3.8, 1e-12, "iauRxpv", "12", status);
-
-#    @test isapprox(rpv[0][1], 3.9, 1e-12, "iauRxpv", "21", status);
-#    @test isapprox(rpv[1][1], 5.2, 1e-12, "iauRxpv", "22", status);
-
-#    @test isapprox(rpv[0][2], 7.1, 1e-12, "iauRxpv", "31", status);
-#    @test isapprox(rpv[1][2], 5.8, 1e-12, "iauRxpv", "32", status);
-# end
-
-# let
-#    double a[3][3], b[3][3], atb[3][3];
-
-
-#    a[0][0] = 2.0;
-#    a[0][1] = 3.0;
-#    a[0][2] = 2.0;
-
-#    a[1][0] = 3.0;
-#    a[1][1] = 2.0;
-#    a[1][2] = 3.0;
-
-#    a[2][0] = 3.0;
-#    a[2][1] = 4.0;
-#    a[2][2] = 5.0;
-
-#    b[0][0] = 1.0;
-#    b[0][1] = 2.0;
-#    b[0][2] = 2.0;
-
-#    b[1][0] = 4.0;
-#    b[1][1] = 1.0;
-#    b[1][2] = 1.0;
-
-#    b[2][0] = 3.0;
-#    b[2][1] = 0.0;
-#    b[2][2] = 1.0;
-
-#    iauRxr(a, b, atb);
-
-#    @test isapprox(atb[0][0], 20.0, 1e-12, "iauRxr", "11", status);
-#    @test isapprox(atb[0][1],  7.0, 1e-12, "iauRxr", "12", status);
-#    @test isapprox(atb[0][2],  9.0, 1e-12, "iauRxr", "13", status);
-
-#    @test isapprox(atb[1][0], 20.0, 1e-12, "iauRxr", "21", status);
-#    @test isapprox(atb[1][1],  8.0, 1e-12, "iauRxr", "22", status);
-#    @test isapprox(atb[1][2], 11.0, 1e-12, "iauRxr", "23", status);
-
-#    @test isapprox(atb[2][0], 34.0, 1e-12, "iauRxr", "31", status);
-#    @test isapprox(atb[2][1], 10.0, 1e-12, "iauRxr", "32", status);
-#    @test isapprox(atb[2][2], 15.0, 1e-12, "iauRxr", "33", status);
-# end
+    @test isapprox(atb[3, 1], 34.0, atol=1e-12)
+    @test isapprox(atb[3, 2], 10.0, atol=1e-12)
+    @test isapprox(atb[3, 3], 15.0, atol=1e-12)
+end
 
 let
     theta = 0.3456789
