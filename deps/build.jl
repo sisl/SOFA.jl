@@ -1,7 +1,7 @@
 using BinDeps
 
 @BinDeps.setup
-group = library_group("SatelliteScheduling")
+group = library_group("SOFA")
 
 libsofa_c = library_dependency("libsofa_c", aliases = ["libsofa_c", "libsofa"], runtime = true, group = group)
 

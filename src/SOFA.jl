@@ -7,6 +7,9 @@ else
     error("libsofa_c not properly installed. Please run Pkg.build(\"SOFA\")")
 end
 
+# Use static arrays
+using StaticArrays
+
 ####################
 # Header Constants #
 ####################
@@ -195,9 +198,13 @@ include("fapa03.jl")
 include("fasa03.jl")
 include("faur03.jl")
 include("fave03.jl")
+include("fk45z.jl")
 include("fk52h.jl")
 include("fk5hip.jl")
 include("fk5hz.jl")
+include("fk54z.jl")
+include("fk425.jl")
+include("fk524.jl")
 include("fw2m.jl")
 include("fw2xy.jl")
 include("g2icrs.jl")

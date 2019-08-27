@@ -20,6 +20,7 @@ The package versions correspond to the following releases of the SOFA C Library:
 
 | Package Version | SOFA Release |
 | --------------- | ------------ | 
+| v2.0            | 2019-07-22   |
 | v1.0            | 2018-01-30   |
 
 ## Notes
