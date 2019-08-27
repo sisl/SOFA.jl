@@ -33,5 +33,5 @@ function iauPv2p(pv::AbstractMatrix{<:Real})
          (Ptr{Cdouble}, Ptr{Cdouble}), 
           convert(Array{Float64, 2}, pv'), p)
 
-   return p
+   return SVector{3}(p)
 end

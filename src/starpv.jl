@@ -134,5 +134,5 @@ function iauStarpv(ra::Real, dec::Real, pmr::Real, pmd::Real,
        convert(Float64, px), convert(Float64, rv),
        pv)
 
-   return status, convert(Array{Float64, 2}, pv')
+   return status, SMatrix{2,3}(pv')
 end

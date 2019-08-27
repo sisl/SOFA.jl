@@ -78,5 +78,5 @@ function iauTpstv(xi::Real, eta::Real, v0::AbstractVector{<:Real})
        convert(Array{Float64, 1}, v0),
        v)
 
-   return v
+   return SVector{3}(v)
 end

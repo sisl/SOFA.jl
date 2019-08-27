@@ -60,5 +60,5 @@ function iauNutm80(date1::Real, date2::Real)
         (Cdouble, Cdouble, Ptr{Cdouble},), 
         convert(Float64, date1), convert(Float64, date2), rmatn)
 
-   return convert(Array{Float64,2}, rmatn')
+   return SMatrix{3,3}(rmatn')
 end

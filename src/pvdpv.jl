@@ -42,5 +42,5 @@ function iauPvdpv(a::AbstractMatrix{<:Real}, b::AbstractMatrix{<:Real})
           convert(Array{Float64, 2}, b'), 
           adb)
 
-   return adb
+   return SVector{2}(adb)
 end

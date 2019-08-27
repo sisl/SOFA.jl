@@ -38,5 +38,5 @@ function iauSxpv(s::Real, pv::AbstractMatrix{<:Real})
        convert(Array{Float64, 2}, pv'),
        spv)
 
-   return convert(Array{Float64, 2}, spv')
+   return SMatrix{2,3}(spv')
 end

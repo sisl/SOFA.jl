@@ -45,5 +45,5 @@ function iauS2pv(theta::Real, phi::Real, r::Real,
        convert(Float64, rd),
        pv)
 
-   return convert(Array{Float64, 2}, pv')
+   return SMatrix{2,3}(pv')
 end

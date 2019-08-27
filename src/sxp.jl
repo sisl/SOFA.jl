@@ -35,5 +35,5 @@ function iauSxp(s::Real, p::AbstractVector{<:Real})
        convert(Array{Float64, 1}, p),
        sp)
 
-   return sp
+   return SVector{3}(sp)
 end

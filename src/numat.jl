@@ -57,5 +57,5 @@ function iauNumat(epsa::Real, dpsi::Real, deps::Real)
          convert(Float64, epsa), convert(Float64, dpsi), convert(Float64, deps),
          rmatn)
  
-    return convert(Array{Float64,2}, rmatn')
+    return SMatrix{3,3}(rmatn')
  end

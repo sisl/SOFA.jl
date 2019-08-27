@@ -90,5 +90,5 @@ function iauC2ibpn(date1::Real, date2::Real, rbpn::AbstractMatrix{<:Real})
          convert(Float64, date1), convert(Float64, date2), convert(Array{Float64, 2}, rbpn'),
          rc2i)
 
-   return convert(Array{Float64,2}, rc2i')
+   return SMatrix{3,3}(rc2i')
 end

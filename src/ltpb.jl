@@ -60,5 +60,5 @@ function iauLtpb(epj::Real)
           convert(Float64, epj),
           rpb)
 
-   return convert(Array{Float64, 2}, rpb')
+   return SMatrix{3,3}(rpb')
 end

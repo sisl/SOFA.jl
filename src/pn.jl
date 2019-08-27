@@ -45,5 +45,5 @@ function iauPn(p::AbstractVector{<:Real})
         (Ptr{Cdouble}, Ref{Cdouble}, Ptr{Cdouble}),
          convert(Array{Float64, 1}, p), ref_r, u)
 
-   return ref_r[], u
+   return ref_r[], SVector{3}(u)
 end

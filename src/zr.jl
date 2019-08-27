@@ -27,5 +27,5 @@ function iauZr()
            r)
 
     # Transpose since C call return row-major operation
-   return convert(Array{Float64, 2}, r')
+   return SMatrix{3,3}(r')
 end

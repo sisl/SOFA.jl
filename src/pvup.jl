@@ -39,5 +39,5 @@ function iauPvup(dt::Real, pv::AbstractMatrix{<:Real})
           convert(Array{Float64, 2}, pv'),
           p)
 
-   return convert(Array{Float64, 1}, p)
+   return SVector{3}(p)
 end

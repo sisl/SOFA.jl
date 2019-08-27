@@ -74,5 +74,5 @@ function iauGd2gc(n::Int, elong::Real, phi::Real, height::Real)
          convert(Float64, height),
          xyz)
  
-   return status, xyz
+   return status, SVector{3}(xyz)
  end

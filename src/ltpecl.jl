@@ -50,5 +50,5 @@ function iauLtpecl(epj::Real)
           convert(Float64, epj),
           vec)
 
-   return vec
+   return SVector{3}(vec)
 end

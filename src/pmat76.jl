@@ -82,5 +82,5 @@ function iauPmat76(date1::Real, date2::Real)
        convert(Float64, date2),
        rmatp)
 
-   return convert(Array{Float64, 2}, rmatp')
+   return SMatrix{3,3}(rmatp')
 end

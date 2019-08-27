@@ -77,5 +77,5 @@ function iauEcm06(date1::Real, date2::Real)
          convert(Float64, date1), convert(Float64, date2),
          rm)
 
-   return convert(Array{Float64,2}, rm')
+   return SMatrix{3,3}(rm')
 end

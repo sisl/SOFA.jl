@@ -33,5 +33,5 @@ function iauP2pv(p::AbstractVector{<:Real})
        convert(Array{Float64, 1}, p),
        pv)
 
-   return convert(Array{Float64, 2}, pv')
+   return SMatrix{2,3}(pv')
 end

@@ -70,5 +70,5 @@ function iauLtecm(epj::Real)
           convert(Float64, epj),
           rm)
 
-   return convert(Array{Float64, 2}, rm')
+   return SMatrix{3,3}(rm')
 end

@@ -50,5 +50,5 @@ function iauLtpequ(epj::Real)
           convert(Float64, epj),
           veq)
 
-   return veq
+   return SVector{3}(veq)
 end

@@ -39,5 +39,5 @@ function iauTrxpv(r::AbstractMatrix{<:Real}, pv::AbstractMatrix{<:Real})
        convert(Array{Float64, 2}, pv'),
        trpv)
 
-   return convert(Array{Float64, 2}, trpv')
+   return SMatrix{2,3}(trpv')
 end

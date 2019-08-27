@@ -68,5 +68,5 @@ function iauPmpx(rc::Real, dc::Real, pr::Real, pd::Real,
        convert(Array{Float64, 1}, pob),
        pco)
 
-   return convert(Array{Float64, 1}, pco)
+   return SVector{3}(pco)
 end

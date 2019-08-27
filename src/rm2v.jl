@@ -45,5 +45,5 @@ function iauRm2v(r::AbstractMatrix{<:Real})
           convert(Array{Float64, 2}, r'),
           w)
 
-   return w
+   return SVector{3}(w)
 end

@@ -84,5 +84,5 @@ function iauC2ixy(date1::Real, date2::Real, x::Real, y::Real)
           convert(Float64, x), convert(Float64, y),
           rc2i)
  
-    return convert(Array{Float64,2}, rc2i')
+    return SMatrix{3,3}(rc2i')
  end

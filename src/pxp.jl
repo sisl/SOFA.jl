@@ -36,5 +36,5 @@ function iauPxp(a::AbstractVector{<:Real}, b::AbstractVector{<:Real})
           convert(Array{Float64, 1}, b),
           axb)
 
-   return convert(Array{Float64, 1}, axb)
+   return SVector{3}(axb)
 end

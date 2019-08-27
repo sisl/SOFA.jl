@@ -94,5 +94,5 @@ function iauC2t06a(tta::Real, ttb::Real, uta::Real, utb::Real, xp::Real, yp::Rea
          convert(Float64, xp), convert(Float64, yp),
          rc2t)
 
-   return convert(Array{Float64,2}, rc2t')
+   return SMatrix{3,3}(rc2t')
 end

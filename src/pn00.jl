@@ -122,6 +122,6 @@ function iauPn00(date1::Real, date2::Real, dpsi::Real, deps::Real)
          convert(Float64, deps),
          ref_epsa, rb, rp, rbp, rn, rbpn)
 
-   return ref_epsa[], convert(Array{Float64, 2}, rb'), convert(Array{Float64, 2}, rp'),
-      convert(Array{Float64, 2}, rbp'), convert(Array{Float64, 2}, rn'), convert(Array{Float64, 2}, rbpn')
+   return ref_epsa[], SMatrix{3,3}(rb'), SMatrix{3,3}(rp'),
+      SMatrix{3,3}(rbp'), SMatrix{3,3}(rn'), SMatrix{3,3}(rbpn')
 end

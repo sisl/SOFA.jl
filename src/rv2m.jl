@@ -40,5 +40,5 @@ function iauRv2m(w::AbstractVector{<:Real})
          (Ptr{Cdouble}, Ptr{Cdouble}),
           w, r)
 
-   return convert(Array{Float64, 2}, r')
+   return SMatrix{3,3}(r')
 end

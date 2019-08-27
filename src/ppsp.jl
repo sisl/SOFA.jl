@@ -39,5 +39,5 @@ function iauPpsp(a::AbstractVector{<:Real}, s::Real, b::AbstractVector{<:Real})
          convert(Array{Float64, 1}, b),
          apsb)
 
-   return apsb
+   return SVector{3}(apsb)
 end

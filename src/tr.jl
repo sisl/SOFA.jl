@@ -36,5 +36,5 @@ function iauTr(r::AbstractMatrix{<:Real})
        convert(Array{Float64, 2}, r'),
        rt)
 
-   return convert(Array{Float64, 2}, rt')
+   return SMatrix{3,3}(rt')
 end

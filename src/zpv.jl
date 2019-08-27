@@ -30,5 +30,5 @@ function iauZpv()
            pv)
 
    # Transpose since C call return row-major operation
-   return convert(Array{Float64, 2}, pv')
+   return SMatrix{2,3}(pv')
 end

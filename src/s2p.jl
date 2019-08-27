@@ -36,5 +36,5 @@ function iauS2p(theta::Real, phi::Real, r::Real)
        convert(Float64, r),
        p)
 
-   return p
+   return SVector{3}(p)
 end

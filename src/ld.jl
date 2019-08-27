@@ -87,5 +87,5 @@ function iauLd(rh::Real, p::AbstractVector{<:Real}, q::AbstractVector{<:Real},
           convert(Array{Float64, 1}, q), convert(Array{Float64, 1}, e),
           convert(Float64, em), convert(Float64, dlim), p1)
 
-   return p1
+   return SVector{3}(p1)
 end

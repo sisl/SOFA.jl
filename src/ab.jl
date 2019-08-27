@@ -59,5 +59,5 @@ function iauAb(pnat::AbstractVector{<:Real}, v::AbstractVector{<:Real}, s::Real,
          convert(Float64, s), 
          convert(Float64, bm1), ppr)
 
-   return ppr
+   return SVector{3}(ppr)
 end

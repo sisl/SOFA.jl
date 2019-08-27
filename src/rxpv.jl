@@ -36,5 +36,5 @@ function iauRxpv(r::AbstractMatrix{<:Real}, pv::AbstractMatrix{<:Real})
          convert(Array{Float64, 2}, pv'),
          rpv)
 
-   return convert(Array{Float64, 2}, rpv')
+   return SMatrix{2,3}(rpv')
 end

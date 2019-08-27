@@ -61,5 +61,5 @@ function iauLtp(epj::Real)
           convert(Float64, epj),
           rp)
 
-   return convert(Array{Float64, 2}, rp')
+   return SMatrix{3,3}(rp')
 end

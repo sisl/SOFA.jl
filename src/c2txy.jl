@@ -100,5 +100,5 @@ function iauC2txy(tta::Real, ttb::Real, uta::Real, utb::Real,
          tta, ttb, uta, utb, x, y, xp, yp,
          rc2t)
 
-   return convert(Array{Float64,2}, rc2t')
+   return SMatrix{3,3}(rc2t')
 end

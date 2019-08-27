@@ -83,5 +83,5 @@ function iauFw2m(gamb::Real, phib::Real, psi::Real, eps::Real)
            convert(Float64, psi), convert(Float64, eps),
            r)
  
-    return convert(Array{Float64, 2}, r')
+    return SMatrix{3,3}(r')
  end

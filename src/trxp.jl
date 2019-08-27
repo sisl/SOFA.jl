@@ -39,5 +39,5 @@ function iauTrxp(r::AbstractMatrix{<:Real}, p::AbstractVector{<:Real})
        convert(Array{Float64, 1}, p),
        trp)
 
-   return trp
+   return SVector{3}(trp)
 end

@@ -36,5 +36,5 @@ function iauPmp(a::AbstractVector{<:Real}, b::AbstractVector{<:Real})
        convert(Array{Float64, 1}, b),
        amb)
 
-   return convert(Array{Float64, 1}, amb)
+   return SVector{3}(amb)
 end

@@ -47,5 +47,5 @@ function iauPvxpv(a::AbstractMatrix{<:Real}, b::AbstractMatrix{<:Real})
           convert(Array{Float64, 2}, b'),
           axb)
 
-   return convert(Array{Float64, 2}, axb')
+   return SMatrix{2,3}(axb')
 end

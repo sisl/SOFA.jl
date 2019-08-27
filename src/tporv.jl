@@ -98,5 +98,5 @@ function iauTporv(xi::Real, eta::Real, v::AbstractVector{<:Real})
        convert(Array{Float64, 1}, v),
        v01, v02)
 
-   return status, v01, v02
+   return status, SVector{3}(v01), SVector{3}(v02)
 end

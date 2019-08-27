@@ -48,5 +48,5 @@ function iauLdsun(p::AbstractVector{<:Real}, e::AbstractVector{<:Real}, em::Real
         (Ptr{Cdouble}, Ptr{Cdouble}, Cdouble, Ptr{Cdouble}), 
         convert(Array{Float64, 1}, p), convert(Array{Float64, 1}, e), convert(Float64, em), p1)
 
-   return p1
+   return SVector{3}(p1)
 end

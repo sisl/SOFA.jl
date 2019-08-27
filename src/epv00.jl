@@ -113,5 +113,5 @@ function iauEpv00(date1::Real, date2::Real)
             convert(Float64, date1), convert(Float64, date2),
             pvh, pvb)
    
-      return status, convert(Array{Float64, 2}, pvh'), convert(Array{Float64, 2}, pvb')
+      return status, SMatrix{2,3}(pvh'), SMatrix{2,3}(pvb')
    end

@@ -62,5 +62,5 @@ function iauPom00(xp, yp, sp)
             xp, yp, sp, rpom)
 
      # Transpose since C call return row-major operation
-    return convert(Array{Float64, 2}, rpom')
+    return SMatrix{3,3}(rpom')
 end

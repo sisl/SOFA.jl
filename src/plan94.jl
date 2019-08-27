@@ -175,5 +175,5 @@ function iauPlan94(date1::Real, date2::Real, np::Int)
             convert(Int32, np),
             pv)
 
-    return status, convert(Array{Float64, 2}, pv')
+    return status, SMatrix{2,3}(pv')
 end

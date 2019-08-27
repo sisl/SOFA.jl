@@ -89,5 +89,8 @@ function iauBp00(date1::Real, date2::Real)
         convert(Float64, date1), convert(Float64, date2),
         rb, rp, rbp)
 
-    return convert(Array{Float64,2}, rb'), convert(Array{Float64,2}, rp'), convert(Array{Float64,2}, rbp')
+
+    
+
+    return SMatrix{3,3}(rb'), SMatrix{3,3}(rp'), SMatrix{3,3}(rbp')
 end

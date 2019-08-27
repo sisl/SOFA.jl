@@ -37,5 +37,5 @@ function iauRxr(a::AbstractMatrix{<:Real}, b::AbstractMatrix{<:Real})
          convert(Array{Float64, 2}, b'),
          atb)
 
-   return convert(Array{Float64, 2}, atb')
+   return SMatrix{3,3}(atb')
 end

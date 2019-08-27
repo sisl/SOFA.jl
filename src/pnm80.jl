@@ -69,5 +69,5 @@ function iauPnm80(date1::Real, date2::Real)
        convert(Float64, date2),
        rmatpn)
 
-   return convert(Array{Float64, 2}, rmatpn')
+   return SMatrix{3,3}(rmatpn')
 end

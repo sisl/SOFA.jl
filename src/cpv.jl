@@ -34,5 +34,5 @@ function iauCpv(pv::AbstractMatrix{<:Real})
          (Ptr{Cdouble}, Ptr{Cdouble}), 
          convert(Array{Float64, 2}, pv'), c)
 
-   return convert(Array{Float64,2}, c')
+   return SMatrix{2,3}(c')
 end

@@ -99,5 +99,5 @@ function iauLdn(n::Real, b::Array{iauLDBODY, 1},
           convert(Array{Float64, 1}, ob),  convert(Array{Float64, 1}, sc),
           sn)
 
-   return sn
+   return SVector{3}(sn)
 end

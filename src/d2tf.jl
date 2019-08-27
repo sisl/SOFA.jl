@@ -67,5 +67,5 @@ function iauD2tf(ndp::Int, days::Real)
          convert(Int32, ndp), convert(Float64, days),
          ref_sign, ihmsf)
 
-   return convert(Char, ref_sign[]), ihmsf
+   return convert(Char, ref_sign[]), SVector{4}(ihmsf)
 end

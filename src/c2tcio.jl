@@ -70,5 +70,5 @@ function iauC2tcio(rc2i::AbstractMatrix{<:Real}, era::Real, rpom::AbstractMatrix
          convert(Array{Float64, 2}, rpom'),
          rc2t)
 
-   return convert(Array{Float64,2}, rc2t')
+   return SMatrix{3,3}(rc2t')
 end

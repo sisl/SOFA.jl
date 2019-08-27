@@ -31,5 +31,5 @@ function iauCp(p::AbstractVector{<:Real})
          (Ptr{Cdouble}, Ptr{Cdouble}), 
          convert(Array{Float64, 1}, p), c)
 
-   return c
+   return SVector{3}(c)
 end

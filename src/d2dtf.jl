@@ -96,5 +96,5 @@ function iauD2dtf(scale::String, ndp::Int, d1::Real, d2::Real)
        @warn "Non-zero return code form iauD2dtf: $status"
    end
 
-   return status, ref_iy[], ref_im[], ref_id[], ihmsf
+   return status, ref_iy[], ref_im[], ref_id[], SVector{4}(ihmsf)
 end

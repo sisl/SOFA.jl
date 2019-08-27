@@ -33,5 +33,5 @@ function iauCr(r::AbstractMatrix{<:Real})
          (Ptr{Cdouble}, Ptr{Cdouble}), 
          convert(Array{Float64, 2}, r'), c)
 
-   return convert(Array{Float64,2}, c')
+   return SMatrix{3,3}(c')
 end

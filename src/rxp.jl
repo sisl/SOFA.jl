@@ -36,5 +36,5 @@ function iauRxp(r::AbstractMatrix{<:Real}, p::AbstractVector{<:Real})
           convert(Array{Float64, 1}, p),
           rp)
  
-    return rp
+    return SVector{3}(rp)
  end

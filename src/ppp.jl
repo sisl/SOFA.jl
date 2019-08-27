@@ -34,5 +34,5 @@ function iauPpp(a::AbstractVector{<:Real}, b::AbstractVector{<:Real})
          convert(Array{Float64, 1}, b),
          apb)
 
-   return apb
+   return SVector{3}(apb)
 end

@@ -27,5 +27,5 @@ function iauZp()
            p)
 
    # Transpose since C call return row-major operation
-   return p
+   return SVector{3}(p)
 end

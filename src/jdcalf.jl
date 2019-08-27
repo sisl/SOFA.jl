@@ -73,5 +73,5 @@ function iauJdcalf(ndp::Int, dj1::Real, dj2::Real)
        @warn "iauJdcalf return non-zero exit code"
    end
 
-   return status, iymdf
+   return status, SVector{4}(iymdf)
 end

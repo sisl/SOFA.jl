@@ -45,5 +45,5 @@ function iauPvu(dt::Real, pv::AbstractMatrix{<:Real})
           convert(Array{Float64, 2}, pv'),
           upv)
 
-   return convert(Array{Float64, 2}, upv')
+   return SMatrix{2,3}(upv')
 end

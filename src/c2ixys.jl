@@ -66,5 +66,5 @@ function iauC2ixys(x::Real, y::Real, s::Real)
          convert(Float64, x), convert(Float64, y), convert(Float64, s),
          rc2i)
 
-   return convert(Array{Float64,2}, rc2i')
+   return SMatrix{3,3}(rc2i')
 end

@@ -31,5 +31,5 @@ function iauS2c(theta::Real, phi::Real)
        convert(Float64, phi),
        c)
 
-   return c
+   return SVector{3}(c)
 end

@@ -67,5 +67,5 @@ function iauPnm06a(date1::Real, date2::Real)
        convert(Float64, date2),
        rbpn)
 
-   return convert(Array{Float64, 2}, rbpn')
+   return SMatrix{3,3}(rbpn')
 end

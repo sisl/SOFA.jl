@@ -52,5 +52,5 @@ function iauFk5hip()
          (Ptr{Cdouble}, Ptr{Cdouble}), 
           r5h, s5h)
 
-   return convert(Array{Float64, 2}, r5h'), s5h
+   return SMatrix{3,3}(r5h'), SVector{3}(s5h)
 end

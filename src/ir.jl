@@ -26,5 +26,5 @@ function iauIr()
         (Ptr{Cdouble},), 
         I)
 
-   return convert(Array{Float64,2}, I')
+   return SMatrix{3,3}(I')
 end

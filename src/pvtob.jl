@@ -86,5 +86,5 @@ function iauPvtob(elong::Real, phi::Real, hm::Real,
          convert(Float64, sp),
          convert(Float64, theta), pv)
 
-    return convert(Array{Float64, 2}, pv')
+    return SMatrix{2,3}(pv')
 end
