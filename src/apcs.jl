@@ -125,11 +125,6 @@ SOFA release 2018-01-30
 
 Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
-# void iauApcs(double date1, double date2, double pv[2][3],
-#              double ebpv[2][3], double ehp[3],
-#              iauASTROM *astrom)
-
-
 function iauApcs(date1::Real, date2::Real, 
                pv::Array{<:Real, 2}, ebpv::Array{<:Real, 2}, 
                ehp::Array{<:Real, 1})

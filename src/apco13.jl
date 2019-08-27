@@ -175,7 +175,6 @@ SOFA release 2018-01-30
 
 Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
-
 function iauApco13(utc1::Real, utc2::Real, dut1::Real,
                   elong::Real, phi::Real, hm::Real,
                   xp::Real, yp::Real,

@@ -56,10 +56,8 @@ SOFA release 2018-01-30
 
 Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
-
 # void iauC2tcio(double rc2i[3][3], double era, double rpom[3][3],
 #                double rc2t[3][3])
-
 function iauC2tcio(rc2i::Array{<:Real, 2}, era::Real, rpom::Array{<:Real, 2})
 
    # Allocate return value

@@ -80,12 +80,6 @@ SOFA release 2018-01-30
 
 Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
-
-# void iauAtci13(double rc, double dc,
-#                double pr, double pd, double px, double rv,
-#                double date1, double date2,
-#                double *ri, double *di, double *eo)
-
 function iauAtci13(rc::Real, dc::Real, pr::Real,
                   pd::Real, px::Real, rv::Real,
                   date1::Real, date2::Real)

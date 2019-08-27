@@ -80,8 +80,6 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 # int iauDtf2d(const char *scale, int iy, int im, int id,
 #              int ihr, int imn, double sec, double *d1, double *d2)
-
-export iauDtf2d
 function iauDtf2d(scale::String, iy::Real, im::Real, id::Real, ihr::Real, imn::Real, sec::Real)
    ref_d1 = Ref{Float64}(0.0)
    ref_d2 = Ref{Float64}(0.0)

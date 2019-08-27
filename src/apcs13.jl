@@ -115,9 +115,6 @@ SOFA release 2018-01-30
 
 Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
-# void iauApcs13(double date1, double date2, double pv[2][3],
-#                iauASTROM *astrom)
-
 function iauApcs13(date1::Real, date2::Real,
                   pv::Array{<:Real, 2})
    # Allocate return value

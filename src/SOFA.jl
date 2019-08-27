@@ -1,5 +1,5 @@
-module SOFA
 __precompile__(true)
+module SOFA
 
 if isfile(joinpath(dirname(@__FILE__),"..","deps","deps.jl"))
     include("../deps/deps.jl")
