@@ -30,7 +30,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 
 # void iauPpsp(double a[3], double s, double b[3], double apsb[3])
-function iauPpsp(a::Array{<:Real, 1}, s::Real, b::Array{<:Real, 1})
+function iauPpsp(a::AbstractVector{<:Real}, s::Real, b::AbstractVector{<:Real})
    apsb = zeros(Float64, 3)
    ccall((:iauPpsp, libsofa_c), Cvoid, 
          (Ptr{Cdouble}, Cdouble, Ptr{Cdouble}, Ptr{Cdouble}), 

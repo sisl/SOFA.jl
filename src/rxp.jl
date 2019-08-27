@@ -28,7 +28,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 
 # void iauRxp(double r[3][3], double p[3], double rp[3])
-function iauRxp(r::Array{<:Real, 2}, p::Array{<:Real, 1})
+function iauRxp(r::AbstractMatrix{<:Real}, p::AbstractVector{<:Real})
     rp = zeros(Float64, 3)
     ccall((:iauRxp, libsofa_c), Cvoid, 
           (Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), 

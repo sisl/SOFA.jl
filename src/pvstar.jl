@@ -101,7 +101,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 # int iauPvstar(double pv[2][3], double *ra, double *dec,
 #               double *pmr, double *pmd, double *px, double *rv)
 
-function iauPvstar(pv::Array{<:Real, 2})
+function iauPvstar(pv::AbstractMatrix{<:Real})
    # Preallocate return values
    ref_ra  = Ref{Float64}(0.0)
    ref_dec = Ref{Float64}(0.0)

@@ -55,7 +55,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 #              double pco[3])
 
 function iauPmpx(rc::Real, dc::Real, pr::Real, pd::Real,
-                 px::Real, rv::Real, pmt::Real, pob::Array{<:Real, 1})
+                 px::Real, rv::Real, pmt::Real, pob::AbstractVector{<:Real})
    pco = zeros(Float64, 3)
    
    ccall((:iauPmpx, libsofa_c), Cvoid, 

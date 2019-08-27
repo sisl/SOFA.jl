@@ -35,7 +35,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 
 # void iauRy(double theta, double r[3][3])
-function iauRy(theta::Real, r::Array{<:Real, 2})
+function iauRy(theta::Real, r::AbstractMatrix{<:Real})
 
    # Transpose matrix upfront
    r = Array{Float64, 2}(r') # Transpose input up front

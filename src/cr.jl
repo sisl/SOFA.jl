@@ -24,7 +24,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 # void iauCr(double r[3][3], double c[3][3])
 
-function iauCr(r::Array{<:Real, 2})
+function iauCr(r::AbstractMatrix{<:Real})
 
    # Allocate return value
    c = zeros(Float64, 3, 3)

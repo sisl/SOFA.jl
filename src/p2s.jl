@@ -33,7 +33,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 
 # void iauP2s(double p[3], double *theta, double *phi, double *r)
-function iauP2s(p::Array{<:Real, 1})
+function iauP2s(p::AbstractVector{<:Real})
    ref_theta = Ref{Float64}(0.0)
    ref_phi   = Ref{Float64}(0.0)
    ref_r     = Ref{Float64}(0.0)

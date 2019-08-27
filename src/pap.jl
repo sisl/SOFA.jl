@@ -44,7 +44,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 
 # double iauPap(double a[3], double b[3])
-function iauPap(a::Array{<:Real, 1}, b::Array{<:Real, 1})
+function iauPap(a::AbstractVector{<:Real}, b::AbstractVector{<:Real})
    return ccall((:iauPap, libsofa_c), Cdouble, 
        (Ptr{Cdouble}, Ptr{Cdouble}), 
        convert(Array{Float64, 1}, a),

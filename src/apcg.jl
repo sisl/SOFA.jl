@@ -104,7 +104,7 @@ SOFA release 2018-01-30
 
 Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
-function iauApcg(date1::Real, date2::Real, ebpv::Array{<:Real, 2}, ehp::Array{<:Real, 1})
+function iauApcg(date1::Real, date2::Real, ebpv::AbstractMatrix{<:Real}, ehp::AbstractVector{<:Real})
     # Allocate return value
     ref_astrom = Ref{iauASTROM}(iauASTROM())
 

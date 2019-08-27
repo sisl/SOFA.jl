@@ -60,7 +60,7 @@ export iauC2teqx
 # void iauC2teqx(double rbpn[3][3], double gst, double rpom[3][3],
 #                double rc2t[3][3])
 
-function iauC2teqx(rbpn::Array{<:Real, 2}, gst::Real, rpom::Array{<:Real, 2})
+function iauC2teqx(rbpn::AbstractMatrix{<:Real}, gst::Real, rpom::AbstractMatrix{<:Real})
 
    # Allocate return value
    rc2t = zeros(Float64, 3, 3)

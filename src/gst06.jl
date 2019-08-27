@@ -73,7 +73,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 #                 double rnpb[3][3])
 
 function iauGst06(uta::Real, utb::Real, tta::Real, ttb::Real,
-                   rnpb::Array{<:Real, 2})
+                   rnpb::AbstractMatrix{<:Real})
 
    return ccall((:iauGst06, libsofa_c), Cdouble,
                (Cdouble, Cdouble, Cdouble, Cdouble, Ptr{Cdouble}),

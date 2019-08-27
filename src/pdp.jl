@@ -22,7 +22,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 
 # double iauPdp(double a[3], double b[3])
-function iauPdp(a::Array{<:Real, 1}, b::Array{<:Real, 1})
+function iauPdp(a::AbstractVector{<:Real}, b::AbstractVector{<:Real})
    return ccall((:iauPdp, libsofa_c), Cdouble, 
        (Ptr{Cdouble}, Ptr{Cdouble}), 
        convert(Array{Float64, 1}, a),

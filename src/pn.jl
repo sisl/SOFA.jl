@@ -36,7 +36,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 
 # void iauPn(double p[3], double *r, double u[3])
 
-function iauPn(p::Array{<:Real, 1})
+function iauPn(p::AbstractVector{<:Real})
    # Allocate return values
    ref_r = Ref{Float64}(0.0)
    u = zeros(Float64, 3)

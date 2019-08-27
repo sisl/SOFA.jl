@@ -22,7 +22,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 
 # void iauCp(double p[3], double c[3])
 
-function iauCp(p::Array{<:Real, 1})
+function iauCp(p::AbstractVector{<:Real})
 
    # Allocate return value
    c = zeros(Float64, 3)

@@ -116,7 +116,7 @@ SOFA release 2018-01-30
 Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 function iauApcs13(date1::Real, date2::Real,
-                  pv::Array{<:Real, 2})
+                  pv::AbstractMatrix{<:Real})
    # Allocate return value
    ref_astrom = Ref{iauASTROM}(iauASTROM())
 

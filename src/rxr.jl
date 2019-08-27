@@ -29,7 +29,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 
 # void iauRxr(double a[3][3], double b[3][3], double atb[3][3])
-function iauRxr(a::Array{<:Real, 2}, b::Array{<:Real, 2})
+function iauRxr(a::AbstractMatrix{<:Real}, b::AbstractMatrix{<:Real})
    atb = zeros(Float64, 3, 3)
    ccall((:iauRxr, libsofa_c), Cvoid, 
          (Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), 

@@ -25,7 +25,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 
 # void iauPv2p(double pv[2][3], double p[3])
 
-function iauPv2p(pv::Array{<:Real, 2})
+function iauPv2p(pv::AbstractMatrix{<:Real})
    # Preallocate return values
    p = zeros(Float64, 3)
 

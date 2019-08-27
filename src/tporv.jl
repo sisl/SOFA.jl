@@ -86,7 +86,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 # int iauTporv(double xi, double eta, double v[3],
 #              double v01[3], double v02[3])
 
-function iauTporv(xi::Real, eta::Real, v::Array{<:Real, 1})
+function iauTporv(xi::Real, eta::Real, v::AbstractVector{<:Real})
    v01 = zeros(Float64, 3)
    v02 = zeros(Float64, 3)
 

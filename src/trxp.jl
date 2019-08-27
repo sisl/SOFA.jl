@@ -30,7 +30,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 
 # void iauTrxp(double r[3][3], double p[3], double trp[3])
 
-function iauTrxp(r::Array{<:Real, 2}, p::Array{<:Real, 1})
+function iauTrxp(r::AbstractMatrix{<:Real}, p::AbstractVector{<:Real})
    trp = zeros(Float64, 3)
 
    ccall((:iauTrxp, libsofa_c), Cvoid, 

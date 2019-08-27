@@ -73,7 +73,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 
 # int iauTpxev(double v[3], double v0[3], double *xi, double *eta)
 
-function iauTpxev(v::Array{<:Real, 1}, v0::Array{<:Real, 1})
+function iauTpxev(v::AbstractVector{<:Real}, v0::AbstractVector{<:Real})
    ref_xi = Ref{Float64}(0.0)
    ref_eta = Ref{Float64}(0.0)
 

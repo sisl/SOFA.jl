@@ -42,7 +42,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 #              double *theta, double *phi, double *r,
 #              double *td, double *pd, double *rd)
 
-function iauPv2s(pv::Array{<:Real, 2})
+function iauPv2s(pv::AbstractMatrix{<:Real})
     # Preallocate return values
     ref_theta = Ref{Float64}(0.0)
     ref_phi = Ref{Float64}(0.0)

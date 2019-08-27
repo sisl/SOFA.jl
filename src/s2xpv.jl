@@ -30,7 +30,7 @@ export iauS2xpv
 
 # void iauS2xpv(double s1, double s2, double pv[2][3], double spv[2][3])
 
-function iauS2xpv(s1::Real, s2::Real, pv::Array{<:Real, 2})
+function iauS2xpv(s1::Real, s2::Real, pv::AbstractMatrix{<:Real})
    spv = zeros(Float64, 3, 2)
 
    ccall((:iauS2xpv, libsofa_c), Cvoid, 

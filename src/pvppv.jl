@@ -27,7 +27,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 
 # void iauPvppv(double a[2][3], double b[2][3], double apb[2][3])
-function iauPvppv(a::Array{<:Real, 2}, b::Array{<:Real, 2})
+function iauPvppv(a::AbstractMatrix{<:Real}, b::AbstractMatrix{<:Real})
    # Preallocate return values
    amb = zeros(Float64, 3, 2)
 

@@ -26,7 +26,7 @@ export iauPpp
 """
 
 # void iauPpp(double a[3], double b[3], double apb[3])
-function iauPpp(a::Array{<:Real, 1}, b::Array{<:Real, 1})
+function iauPpp(a::AbstractVector{<:Real}, b::AbstractVector{<:Real})
    apb = zeros(Float64, 3)
    ccall((:iauPpp, libsofa_c), Cvoid, 
          (Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), 

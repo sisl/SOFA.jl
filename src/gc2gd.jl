@@ -59,7 +59,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 # int iauGc2gd( int n, double xyz[3],
 #                double *elong, double *phi, double *height )
 
-function iauGc2gd(n::Int, xyz::Array{<:Real, 1})
+function iauGc2gd(n::Int, xyz::AbstractVector{<:Real})
    ref_elong  = Ref{Float64}(0.0)
    ref_phi    = Ref{Float64}(0.0)
    ref_height = Ref{Float64}(0.0)

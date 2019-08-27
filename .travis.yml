@@ -3,7 +3,7 @@ language: julia
 os:
   - linux
   - osx
-  - windows
+  # - windows
 
 julia:
   - 1.0
@@ -16,7 +16,7 @@ matrix:
     - os: linux
       dist: trusty
     - os: osx
-    - os: windows
+    # - os: windows
   allow_failures:
     - julia: nightly
 

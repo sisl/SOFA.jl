@@ -31,7 +31,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 
 # void iauC2s(double p[3], double *theta, double *phi)
 
-function iauC2s(p::Array{<:Real, 1})
+function iauC2s(p::AbstractVector{<:Real})
 
    # Allocate return value
    ref_theta = Ref{Float64}(0.0)

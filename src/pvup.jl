@@ -29,7 +29,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 
 # void iauPvup(double dt, double pv[2][3], double p[3])
-function iauPvup(dt::Real, pv::Array{<:Real, 2})
+function iauPvup(dt::Real, pv::AbstractMatrix{<:Real})
    # Preallocate return values
    p = zeros(Float64, 3)
 

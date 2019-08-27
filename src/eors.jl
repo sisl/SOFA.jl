@@ -41,7 +41,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 
 # double iauEors(double rnpb[3][3], double s)
 
-function iauEors(rnbp::Array{<:Real, 2}, s::Real)
+function iauEors(rnbp::AbstractMatrix{<:Real}, s::Real)
    # Allocate return value
    rm = zeros(Float64, 3, 3)
 

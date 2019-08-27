@@ -25,7 +25,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 
 # void iauPvm(double pv[2][3], double *r, double *s)
-function iauPvm(pv::Array{<:Real, 2})
+function iauPvm(pv::AbstractMatrix{<:Real})
     # Preallocate return values
     ref_r = Ref{Float64}(0.0)
     ref_s = Ref{Float64}(0.0)

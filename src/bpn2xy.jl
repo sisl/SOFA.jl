@@ -41,7 +41,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 # void iauBpn2xy(double rbpn[3][3], double *x, double *y)
 
-function iauBpn2xy(rbpn::Array{<:Real, 2})
+function iauBpn2xy(rbpn::AbstractMatrix{<:Real})
     # Preallocate return values
     ref_x = Ref{Float64}(0.0)
     ref_y = Ref{Float64}(0.0)

@@ -58,7 +58,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 # void iauC2tcio(double rc2i[3][3], double era, double rpom[3][3],
 #                double rc2t[3][3])
-function iauC2tcio(rc2i::Array{<:Real, 2}, era::Real, rpom::Array{<:Real, 2})
+function iauC2tcio(rc2i::AbstractMatrix{<:Real}, era::Real, rpom::AbstractMatrix{<:Real})
 
    # Allocate return value
    rc2t = zeros(Float64, 3, 3)

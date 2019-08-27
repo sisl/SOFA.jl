@@ -35,7 +35,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 
 # void iauRz(double psi, double r[3][3])
-function iauRz(psi::Real, r::Array{<:Real, 2})
+function iauRz(psi::Real, r::AbstractMatrix{<:Real})
 
    # Transpose matrix upfront
    r = Array{Float64, 2}(r') # Transpose input up front
