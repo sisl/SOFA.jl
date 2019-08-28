@@ -1,5 +1,5 @@
 name = "SOFA"
-uuid = "1af8d7aa-ef4f-11e8-1231-0951c72dfe64"
+uuid = "ad3d3fd0-b5f2-51ee-b274-8cdbe62317e2"
 authors = ["Duncan Eddy <duncan.eddy@gmail.com>"]
 version = "2.0.0"
 
