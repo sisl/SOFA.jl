@@ -1,7 +1,7 @@
 name = "SOFA"
 uuid = "ad3d3fd0-b5f2-51ee-b274-8cdbe62317e2"
 authors = ["Duncan Eddy <duncan.eddy@gmail.com>"]
-version = "2.0.1"
+version = "1.0.0"
 
 [deps]
 BinDeps = "9e28174c-4ba2-5203-b857-d8d62c4213ee"
